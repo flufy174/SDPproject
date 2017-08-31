@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  - var userEntries = ["Hey", "guys", "this", "is", "an", "example"]
+  ul
+    for entry in userEntries
+        li= entry
+
+
+
+  input(type="text", name="userName")
+  input(type="submit", value="Submit")
