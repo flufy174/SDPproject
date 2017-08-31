@@ -4,10 +4,10 @@ append styles
 	link(href='../css/signin.css', rel='stylesheet')
 block body
 	.container
-		form.form-signin
+		form.form-signin(method='POST' action='\signin')
 			h2.form-signin-heading Please sign in
 			label.sr-only(for='inputEmail') Email address
-			input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='', name='inputEmail')
+			input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='', name='Email')
 			label.sr-only(for='inputPassword') Password
 			input#inputPassword.form-control(type='password', placeholder='Password', required='')
 			.checkbox

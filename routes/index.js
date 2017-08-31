@@ -14,20 +14,22 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/signin', function (req, res, next) {
+    
     res.render('Master/sign-in.pug');
 });
 
-router.post('/signin', function (req, res, next) {
+router.post('/signin', function (req, res) {
     console.log("Signing recieved");
-    var email = reqs.body.inputEmail;
+    var email = req.body.Email;
     console.log(email);
+    res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
 
 
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('Master/starter.pug', { title: 'Express' });
+    res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
 
 module.exports = router;

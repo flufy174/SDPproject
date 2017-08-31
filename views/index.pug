@@ -1,14 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  - var userEntries = ["Hey", "guys", "this", "is", "an", "example"]
-  ul
-    for entry in userEntries
-        li= entry
+	//this is a method of displaying text
+	h1= title
+	//This is a method of inserting variables into text
+	p Welcome to #{title}
+	- var entries = example
+	ul
+		for index in entries
+			li= index
 
 
-
-  input(type="text", name="userName")
-  input(type="submit", value="Submit")
+	input(type="text", name="userName")
+	input(type="submit", value="Submit")
