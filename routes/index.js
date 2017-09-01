@@ -22,7 +22,7 @@ router.post('/signin', function (req, res) {
     console.log("Signing recieved");
     var email = req.body.Email;
     console.log(email);
-    res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+    res.redirect('/');
 });
 
 
