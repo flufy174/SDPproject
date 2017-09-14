@@ -1,15 +1,27 @@
-extends layout
+extends template
 
 block content
-	//this is a method of displaying text
-	h1= title
-	//This is a method of inserting variables into text
-	p Welcome to #{title}
-	- var entries = example
-	ul
-		for index in entries
-			li= index
+	.container-fluid
+		header
+			// Keeps nav at center of screen
+			h1 Professional Journal
 
+			.alignRight
+				ul.nav.flex-column
+					li.nav-item
+						a.nav-link(href='register') Create Account
+					li.nav-item
+						a.nav-link(href='signin') Sign In
+		
+		br
+		br
+		.alignCenter
+			h2 Get started with your free, easy to use, professional journal
+			br
+			button.btn.btn-primary.btn-lg#startBtn(type='button') Start Your Free Journal
 
-	input(type="text", name="userName")
-	input(type="submit", value="Submit")
+		
+	script.
+		document.getElementById("startBtn").addEventListener("click", function(){
+			document.location.href='register';
+		});

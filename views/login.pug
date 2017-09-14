@@ -1,0 +1,33 @@
+extends template
+
+block content
+	.container-fluid
+		header
+			h1 Professional Journal
+			.alignRight
+				ul.nav.flex-column
+					li.nav-item
+						a.nav-link(href='register') Create Account
+	
+		.centerDetails
+			h3 Sign In
+			br
+			form
+				|Username
+				br
+				input(type='text', name='username', placeholder='Enter Username')
+				br
+				|Password
+				br
+				input(type='password', name='password', placeholder='Enter Password')
+				br
+				br
+				a.btn.btn-primary.btn-block(href='journals') Login
+				br
+				input(type='checkbox', checked='checked')
+				|  Remember me
+				br
+				br
+				|Don't have an account? 
+				a(href='register') Create Account
+		

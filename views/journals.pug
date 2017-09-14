@@ -1,0 +1,91 @@
+extends template
+
+block content
+	.container-fluid
+		header
+			.container
+				// Keeps nav at center of screen
+				h1 Professional Journal
+				ul.nav.nav-tabs.nav-fill
+					li.nav-item
+						a.nav-link.active(href='#') Journals
+					li.nav-item
+						a.nav-link(href='#') Search
+					li.nav-item
+						a.nav-link(href='signin') Sign Out
+		.createJournalButton
+			button#addJournalButton + Create A New Journal
+		#overlay
+		#popup
+			.popupForm
+				form
+					| Create A New Journal
+					br
+					input#journalName(type='text', name='journalName', placeholder='Enter Journal Name')
+					br
+					.popupButtons
+						button#createButton Create
+						button#cancelButton Cancel
+
+		.clickablePanel(onclick="alert('Go to table of journal entries')")
+			.heading
+				| Journal 1
+			.body
+				ul#list(style='list-style-type:none')
+					li Journal Entry 1
+					li Journal Entry 2
+					li Journal Entry 3
+		.clickablePanel(onclick="alert('Go to table of journal entries')")
+			.heading
+				| Journal 2
+			.body
+				ul#list(style='list-style-type:none')
+					li Journal Entry 1
+					li Journal Entry 2
+					li Journal Entry 3
+		.clickablePanel(onclick="alert('Go to table of journal entries')")
+			.heading
+				| Journal 3
+			.body
+				| This is the journal's description. It states what the journal does and what it is used for.
+		.clickablePanel(onclick="alert('Go to table of journal entries')")
+			.heading
+				| Journal 4
+			.body
+				| This is the journal's description. It states what the journal does and what it is used for.
+		.clickablePanel(onclick="alert('Go to table of journal entries')")
+			.heading
+				| Journal 5
+			.body
+				| This is the journal's description. It states what the journal does and what it is used for.
+
+		//popup not working :(
+		script.
+			window.onload = function() {
+				document.getElementById("addJournalButton").onclick = function(){
+				var overlay = document.getElementById("overlay");
+				var popup = document.getElementById("popup")
+				overlay.style.display = "block";
+				popup.style.display = "block";
+			};
+	
+			document.getElementById("cancelButton").onclick = function(){
+				var overlay = document.getElementById("overlay");
+				var popup = document.getElementById("popup");
+				overlay.style.display = "none";
+				popup.style.display = "none";
+			};
+
+			document.getElementById("createButton").onclick = function(){
+				var overlay = document.getElementById("overlay");
+				var popup = document.getElementById("popup");
+				overlay.style.display = "none";
+				popup.style.display = "none";
+				var journalName = document.getElementById("journalName").value;
+				if(journalName == "") {
+					alert('Please enter a name for the journal');
+				}
+				else {
+					alert('Journal created with name: ' + journalName);
+				}
+			};

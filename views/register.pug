@@ -1,0 +1,35 @@
+extends template
+
+block content
+	.container-fluid
+		header
+			h1 Professional Journal
+			.alignRight
+				ul.nav.flex-column
+					li.nav-item
+						a.nav-link(href='signin') Use Existing Account
+		.centerDetails
+			h3 Create Account
+			br
+			form
+				| Full Name
+				br
+				input(type='text', name='name', placeholder='Enter Full Name')
+				br
+				|Username
+				br
+				input(type='text', name='username', placeholder='Username')
+				br
+				|Password
+				br
+				input(type='password', name='password', placeholder='Enter Password')
+				br
+				|Confirm Password
+				br
+				input(type='password', name='password-confirm', placeholder='Enter Password Again')
+				br
+				|Color in HEX (#FFFFFF)
+				input(type='text', name='color', placeholder='Enter Your Favourite Color')
+				br
+				br
+				a.btn.btn-primary.btn-block(href='journals') Register

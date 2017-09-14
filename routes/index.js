@@ -13,9 +13,19 @@ router.post('/', function (req, res, next) {
     console.log(req.body)
 });
 
+//Show the login page
 router.get('/signin', function (req, res, next) {
-    
-    res.render('Master/sign-in.pug');
+    res.render('login.pug');
+});
+
+//Show the registration page
+router.get('/register', function (req, res, next) {
+	res.render('register.pug');
+});
+
+//Show the journals page
+router.get('/journals', function (req, res, next) {
+	res.render('journals.pug');
 });
 
 router.post('/signin', function (req, res) {
@@ -29,7 +39,8 @@ router.post('/signin', function (req, res) {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+	res.render('index.pug');
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
 
 module.exports = router;

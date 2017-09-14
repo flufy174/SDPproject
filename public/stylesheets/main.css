@@ -1,0 +1,105 @@
+
+
+header {
+    color: darkblue;
+}
+
+h1 {
+    text-align: center;
+}
+
+.alignCenter{
+	text-align: center;
+}
+.alignRight{
+	text-align: right;
+	margin-right: 30%;
+	
+}
+.centerDetails {
+    margin: auto;
+    margin-top: 30px;
+    width: 400px;
+    border: 1px solid darkblue;
+    padding: 40px;  
+    background: #eff0f2;
+}
+input[type=text], input[type=password] {
+	padding: 8px 20px;
+	margin: 10px 0;
+	width: 320px;
+}
+
+.clickablePanel {
+    border: 1px solid #706d70;
+    box-shadow: 0px 0px 8px #c6b3c6;
+    border-radius: 5px 5px 0 0;
+    font-size: large;
+    margin: 1% 15%;
+}
+
+.clickablePanel .heading {
+    background: #bdd8f9;
+    border-radius: 5px 5px 0 0;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.clickablePanel .body {
+    padding: 10px 20px;
+    background: #f4f6ff;
+}
+
+
+.clickablePanel:hover {
+    box-shadow: 0px 0px 20px black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.createJournalButton {
+    text-align: center;
+    padding-top: 2%;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    z-index: 99999;
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 150px;
+    margin-top: -75px;
+    margin-left: -150px;
+    background: #FFFFFF;
+    border: 2px solid #000;
+    z-index: 100000;
+
+}
+
+.popupButtons {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    padding-bottom: 2%;
+    width: 100%;
+}
+
+.popupForm {
+    text-align: center;
+    padding-top: 2%;
+}
