@@ -6,6 +6,6 @@
     "\\routes",
     "\\views"
   ],
-  "SelectedNode": "\\public\\stylesheets",
+  "SelectedNode": "\\views\\login.pug",
   "PreviewInSolutionExplorer": false
 }

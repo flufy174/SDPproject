@@ -28,6 +28,11 @@ router.get('/journals', function (req, res, next) {
 	res.render('journals.pug');
 });
 
+//Show the main search page
+router.get('/search', function (req, res, next) {
+	res.render('search.pug')
+});
+
 router.post('/signin', function (req, res) {
     console.log("Signing recieved");
     var email = req.body.Email;

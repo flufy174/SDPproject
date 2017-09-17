@@ -12,14 +12,11 @@ block content
 		.centerDetails
 			h3 Sign In
 			br
-			form
-				|Username
-				br
-				input(type='text', name='username', placeholder='Enter Username')
-				br
-				|Password
-				br
-				input(type='password', name='password', placeholder='Enter Password')
+			form.formInput
+				label(for='username') Username
+				input#username(type='text', name='username', placeholder='Enter Username')
+				label(for='password') Password
+				input#password(type='password', name='password', placeholder='Enter Password')
 				br
 				br
 				a.btn.btn-primary.btn-block(href='journals') Login
