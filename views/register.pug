@@ -10,15 +10,22 @@ block content
 						a.nav-link(href='signin') Use Existing Account
 		.centerDetails
 			h3 Create Account
+			p #{errormsg}
+			
 			br
-			form
-				| Full Name
+			form(method='POST', action='/register', id='register')
+				
+				|Full Name
 				br
 				input(type='text', name='name', placeholder='Enter Full Name')
 				br
 				|Username
 				br
 				input(type='text', name='username', placeholder='Username')
+				br
+				|Email
+				br
+				input(type='email', name='email', placeholder='Enter your email address')
 				br
 				|Password
 				br
@@ -29,7 +36,7 @@ block content
 				input(type='password', name='password-confirm', placeholder='Enter Password Again')
 				br
 				|Color in HEX (#FFFFFF)
-				input(type='text', name='color', placeholder='Enter Your Favourite Color')
+				input(type='text', name='usercolor', placeholder='Enter Your Favourite Color')
 				br
 				br
-				a.btn.btn-primary.btn-block(href='journals') Register
+				a.btn.btn-primary.btn-block(onclick="document.getElementById('register').submit();") Register

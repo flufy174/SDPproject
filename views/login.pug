@@ -12,7 +12,7 @@ block content
 		.centerDetails
 			h3 Sign In
 			br
-			form
+			form(method='POST', action='/signin', id='login')
 				|Username
 				br
 				input(type='text', name='username', placeholder='Enter Username')
@@ -22,7 +22,8 @@ block content
 				input(type='password', name='password', placeholder='Enter Password')
 				br
 				br
-				a.btn.btn-primary.btn-block(href='journals') Login
+				
+				a.btn.btn-primary.btn-block(onclick="document.getElementById('login').submit();") Login
 				br
 				input(type='checkbox', checked='checked')
 				|  Remember me

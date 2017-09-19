@@ -6,6 +6,10 @@ block content
 			.container
 				// Keeps nav at center of screen
 				h1 Professional Journal
+				if (user)
+					h3 Welcome #{user.full_name}
+				if (!user)
+					h3 You are not logged in!
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
 						a.nav-link.active(href='#') Journals
