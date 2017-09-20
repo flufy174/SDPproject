@@ -39,6 +39,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 mongoose.connect('mongodb://localhost:27017/users')
+mongoose.connect('mongodb://localhost:27017/journals')
 
 app.use('/', index);
 app.use('/users', users);

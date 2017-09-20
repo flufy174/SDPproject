@@ -1,0 +1,23 @@
+extends template
+
+block content
+	
+	.container-fluid
+		header
+			h1 Create Journal
+		.centerDetails
+			h3 Create your Journal
+			br
+			form(method='POST', action='/createJournals', id='submit')
+				|Journal name
+				br
+				input(type='text', name='journalName', placeholder='Please enter your text here')
+				|Journal description
+				br
+				input(type='text', name='journalDescription', placeholder='Please enter the description of your jounal')
+				br
+				br
+				a.btn.btn-primary.btn-block(onclick="document.getElementById('submit').submit();") Save
+				br
+
+		
