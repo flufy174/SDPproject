@@ -1,6 +1,7 @@
 extends template
 
 block content
+
 	if (!user)
 		h3 You are not logged in!
 		a(href='/signin')
@@ -19,7 +20,11 @@ block content
 						li.nav-item
 							a.nav-link.active(href='#') Journals
 						li.nav-item
-							a.nav-link(href='#') Search
+							.navSearch
+							input.searchTerm(type='text', placeholder='Search All Journals')
+							button.searchButton(type='submit')
+								i.fa.fa-search
+						a.nav-link.active(href='search') Advanced Search
 						li.nav-item
 							a.nav-link(href='signin') Sign Out
 			.createJournalButton
@@ -47,9 +52,8 @@ block content
 						
 				
 			- }
-
-
-			//popup not working :(
+			//Popup functionality
+			script(src="/javascripts/popup.js")
 			script.
 				window.onload = function() {
 					document.getElementById("addJournalButton").onclick = function(){

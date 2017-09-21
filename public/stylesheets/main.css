@@ -24,12 +24,24 @@ h1 {
     padding: 40px;  
     background: #eff0f2;
 }
-input[type=text], input[type=password] {
+
+
+.addPaddingToChildren > * {
+	padding: 15px;
+}
+/*Style for the form input fields*/
+.formInput input[type=text], input[type=password] {
 	padding: 8px 20px;
 	margin: 10px 0;
 	width: 320px;
 }
 
+.popupInput input[type=text]{
+	width: 250px;
+	margin: 10px 0;
+}
+
+/* PANELS */
 .clickablePanel {
     border: 1px solid #706d70;
     box-shadow: 0px 0px 8px #c6b3c6;
@@ -37,7 +49,6 @@ input[type=text], input[type=password] {
     font-size: large;
     margin: 1% 15%;
 }
-
 .clickablePanel .heading {
     background: #bdd8f9;
     border-radius: 5px 5px 0 0;
@@ -46,17 +57,31 @@ input[type=text], input[type=password] {
     font-size: 24px;
     text-align: center;
 }
-
 .clickablePanel .body {
     padding: 10px 20px;
     background: #f4f6ff;
 }
-
-
 .clickablePanel:hover {
     box-shadow: 0px 0px 20px black;
     border: 1px solid black;
     cursor: pointer;
+}
+
+.panel {
+	font-size: large;
+	border: 1px solid #706d70;
+	margin: 1% 15%;
+}
+.panel .heading{
+	background: #bdd8f9;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+.panel .body{
+	padding: 10px 20px;
+    background: #f4f6ff;
 }
 
 .createJournalButton {
@@ -128,4 +153,114 @@ input[type=text], input[type=password] {
 .popupForm {
     text-align: center;
     padding-top: 2%;
+}
+
+/*Search Bar*/
+.navSearch {
+	width: 66%;
+	position: relative;
+}
+.advSearch{
+	width: 100%;
+	position: relative;
+}
+
+.searchTerm {
+	float: left;
+	width: 100%;
+	border: 3px solid #00B4CC;
+	padding: 15px;
+	height: 20px;
+	border-radius: 5px;
+	outline: none;
+	color: #9DBFAF;
+}
+
+.searchTerm:focus {
+	color: #00B4CC;
+}
+
+.searchButton {
+	position: absolute;
+	right: 0px;
+	width: 40px;
+	height: 36px;
+	border: 1px solid #00B4CC;
+	background: #00B4CC;
+	text-align: center;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+	width: 50%;
+	margin: 1% 25%
+}
+
+
+.createSearchButton {
+    text-align: center;
+    padding-top: 2%;
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+/*DatePicker*/
+
+/* Removes the clear button from date inputs */
+input[type="date"]::-webkit-clear-button {
+	display: none;
+}
+
+/* Removes the spin button */
+input[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+	color: #2c3e50;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+	appearance: none;
+	-webkit-appearance: none;
+	color: #95a5a6;
+	font-family: "Helvetica", arial, sans-serif;
+	font-size: 18px;
+	border: 1px solid #ecf0f1;
+	background: #ecf0f1;
+	padding: 5px;
+	display: inline-block !important;
+	visibility: visible !important;
+}
+
+input[type="date"], focus {
+	color: #95a5a6;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 }

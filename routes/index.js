@@ -75,6 +75,7 @@ router.get('/journals', function (req, res, next) {
 
 });
 
+
 router.get('/searchJournals', function (req, res, next) {
     res.render('searchJournals.pug')
 });
@@ -83,6 +84,13 @@ router.get('/searchJournals', function (req, res, next) {
 router.post('/signin', passport.authenticate('local'), function (req, res) {
     //console.log(user.username)
     res.redirect('/journals');
+
+//Show the main search page
+router.get('/search', function (req, res, next) {
+	res.render('search.pug')
+});
+
+
 });
 
 //Show the login page

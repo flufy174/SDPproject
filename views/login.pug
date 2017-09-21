@@ -13,16 +13,15 @@ block content
 			h3 Sign In
 			br
 			form(method='POST', action='/signin', id='login')
-				|Username
+				label(for='username') Username
 				br
 				input(type='text', name='username', placeholder='Enter Username')
 				br
-				|Password
+				label(for='password') Password
 				br
 				input(type='password', name='password', placeholder='Enter Password')
 				br
 				br
-				
 				a.btn.btn-primary.btn-block(onclick="document.getElementById('login').submit();") Login
 				br
 				input(type='checkbox', checked='checked')
