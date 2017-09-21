@@ -37,13 +37,13 @@ block content
 							button#createButton Create
 							button#cancelButton Cancel
 			- for (var i = 0; i < journals.length; i++) {
-				-var id = journals._id;
-				form(method="GET", action=id, id="entry")
-					.clickablePanel(onclick="document.getElementById('entry').submit();")
-						.heading
-							| #{journals[i].journalName}
-						.body
-							| #{journals[i].description}
+							
+						
+				.clickablePanel(onclick="/")
+					.heading
+						| #{journals[i].journalName}
+					.body
+						| #{journals[i].description}
 						
 				
 			- }
