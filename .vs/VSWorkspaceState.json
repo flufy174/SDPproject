@@ -2,10 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\public",
+    "\\public\\javascripts",
     "\\public\\stylesheets",
     "\\routes",
     "\\views"
   ],
-  "SelectedNode": "\\views\\login.pug",
+  "SelectedNode": "\\public\\stylesheets\\main.css",
   "PreviewInSolutionExplorer": false
 }

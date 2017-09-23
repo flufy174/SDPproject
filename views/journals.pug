@@ -3,20 +3,23 @@ extends template
 block content
 	.container-fluid
 		header
+			
 			.container
 				// Keeps nav at center of screen
 				h1 Professional Journal
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
 						a.nav-link.active(href='#') Journals
+						
 					li.nav-item
 						.navSearch
 							input.searchTerm(type='text', placeholder='Search All Journals')
 							button.searchButton(type='submit')
 								i.fa.fa-search
-						a.nav-link.active(href='search') Advanced Search
+						a.nav-link(href='search') Advanced Search
 					li.nav-item
 						a.nav-link(href='signin') Sign Out
+						
 		.createJournalButton
 			button#addJournalButton + Create A New Journal
 		#overlay
