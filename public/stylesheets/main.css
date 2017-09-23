@@ -25,7 +25,6 @@ h1 {
     background: #eff0f2;
 }
 
-
 .addPaddingToChildren > * {
 	padding: 15px;
 }
@@ -157,18 +156,22 @@ h1 {
 
 /*Search Bar*/
 .navSearch {
-	width: 66%;
-	position: relative;
+	position: relative; 
+    /*
+    position: absolute;
+    right: 0px;
+    width: 25%;*/
+    width: 65%;
 }
 .advSearch{
 	width: 100%;
-	position: relative;
+    position: relative;
 }
 
 .searchTerm {
 	float: left;
 	width: 100%;
-	border: 3px solid #00B4CC;
+	border: 3px solid #bdd8f9;
 	padding: 15px;
 	height: 20px;
 	border-radius: 5px;
@@ -185,8 +188,8 @@ h1 {
 	right: 0px;
 	width: 40px;
 	height: 36px;
-	border: 1px solid #00B4CC;
-	background: #00B4CC;
+	border: 1px solid #bdd8f9;
+	background: #bdd8f9;
 	text-align: center;
 	color: #fff;
 	border-radius: 5px;
@@ -196,8 +199,7 @@ h1 {
 
 /*Resize the wrap to see the search bar change!*/
 .wrap {
-	width: 50%;
-	margin: 1% 25%
+    margin: 1% 15%;
 }
 
 
@@ -229,12 +231,12 @@ h1 {
 
 /*DatePicker*/
 
-/* Removes the clear button from date inputs */
+/* Removes the clear button from date inputs 
 input[type="date"]::-webkit-clear-button {
 	display: none;
-}
+}*/
 
-/* Removes the spin button */
+/* Removes the spin button, as this allows the user to scroll past the max date. Not good! */
 input[type="date"]::-webkit-inner-spin-button {
 	display: none;
 }
@@ -251,7 +253,7 @@ input[type="date"] {
 	color: #95a5a6;
 	font-family: "Helvetica", arial, sans-serif;
 	font-size: 18px;
-	border: 1px solid #ecf0f1;
+	border: 1px solid #d6dadb;
 	background: #ecf0f1;
 	padding: 5px;
 	display: inline-block !important;
