@@ -90,6 +90,9 @@ router.get('/search', function (req, res, next) {
 	res.render('search.pug')
 });
 
+router.get('/entry',function(req, res, next){
+    res.render('entryeditor.pug')
+});
 
 });
 
