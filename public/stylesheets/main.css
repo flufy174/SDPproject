@@ -31,7 +31,7 @@ h1 {
 /*Style for the form input fields*/
 .formInput input[type=text], input[type=password] {
 	padding: 8px 20px;
-	margin: 10px 0;
+	margin: 15px;
 	width: 320px;
 }
 

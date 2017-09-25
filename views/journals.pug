@@ -43,18 +43,16 @@ block content
 							button#cancelButton Cancel
 			- for (var i = 0; i < journals.length; i++) {
 				-var id = journals._id;
-				form(method="GET", action=id, id="entry")
-					.clickablePanel(onclick="document.getElementById('entry').submit();")
+				form(method="GET", action="/entries", id="entries")
+					.clickablePanel(onclick="document.getElementById('entries').submit();")
 						.heading
 							| #{journals[i].journalName}
 						.body
-							| #{journals[i].description}
-						
-				
+							| #{journals[i].description}	
 			- }
 			//Popup functionality
-			script(src="/javascripts/popup.js")
-			script.
+			//script(src="/javascripts/popup.js")
+			//script.
 				window.onload = function() {
 					document.getElementById("addJournalButton").onclick = function(){
 					var overlay = document.getElementById("overlay");
@@ -63,7 +61,7 @@ block content
 					popup.style.display = "block";
 				};
 	
-				document.getElementById("cancelButton").onclick = function(){
+			//	document.getElementById("cancelButton").onclick = function(){
 					var overlay = document.getElementById("overlay");
 					var popup = document.getElementById("popup");
 					overlay.style.display = "none";

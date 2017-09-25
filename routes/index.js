@@ -126,6 +126,16 @@ router.get('/createJournal', function (req, res, next) {
     //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
 
+/* Provides the journal entries page */
+router.get('/entries', function (req, res, next) {
+    res.render('entries.pug', { user: req.user });
+});
+
+/* Provides the entry editor page */
+router.get('/entryeditor', function (req, res, next) {
+    res.render('entryeditor.pug', { user: req.user });
+});
+
 
 /* Provides the create journals page */
 router.post('/createJournals', function (req, res, next) {
