@@ -8,23 +8,22 @@ block content
 		a(href='/register')
 			p Click here to sign up
 	if(user)
+		-var journalID = journalId;
 		.container-fluid
 			header
 				.container
 					// Keeps nav at center of screen
-					h1 Professional Journal
+					h1 ENTRIES
 					if (user)
 						h3 Welcome #{user.full_name}
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
-							a.nav-link.active(href='#') Journals
-						li.nav-item
-							a.nav-link(href='#') Search
+							a.nav-link.active(href='#') Entries
 						li.nav-item
 							a.nav-link(href='signin') Sign Out
 			.createJournalButton
-				form(method="GET", action="/createJournal", id="create")
-					button#addJournalButton + Create A New Journal
+				form(method="GET", action="/entryeditor/" + journalID, id="create")
+					button#addJournalButton + Create A Entry
 			#overlay
 			#popup
 				.popupForm
@@ -36,46 +35,14 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
-			- for (var i = 0; i < journals.length; i++) {
-							
-						
+			- for (var i = 0; i < entries.length; i++) {
+			
+
 				.clickablePanel(onclick="/")
 					.heading
-						| #{journals[i].journalName}
+						| #{entries[i].journalName}
 					.body
-						| #{journals[i].description}
+						p!= entries[i].description
 						
 				
 			- }
-
-
-			//popup not working :(
-			script.
-				window.onload = function() {
-					document.getElementById("addJournalButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup")
-					overlay.style.display = "block";
-					popup.style.display = "block";
-				};
-	
-				document.getElementById("cancelButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup");
-					overlay.style.display = "none";
-					popup.style.display = "none";
-				};
-
-				document.getElementById("createButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup");
-					overlay.style.display = "none";
-					popup.style.display = "none";
-					var journalName = document.getElementById("journalName").value;
-					if(journalName == "") {
-						alert('Please enter a name for the journal');
-					}
-					else {
-						alert('Journal created with name: ' + journalName);
-					}
-				};

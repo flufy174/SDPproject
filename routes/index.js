@@ -13,7 +13,18 @@ var journal = new mongoose.Schema({
     timestamp: String,
     userName: String,
 });
+
+var entry = new mongoose.Schema({
+    EntryID: String,
+    parentID: String,
+    journaName: String,
+    description: String,
+    timestamp: String,
+    userName: String,
+});
+
 var userJournal = mongoose.model('Journal', journal)
+var userEntry = mongoose.model('Entry', entry)
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true}));
 
@@ -61,18 +72,12 @@ router.post('/register', function (req, res) {
 router.get('/journals', function (req, res, next) {
     var name = req.user.username;
     //journal.find({ username: 'flufy174' })
-    console.log("**");
-    var pageJournals = 
+    //var pageJournals = 
     userJournal.find({ userName: name }, function (err, ujournal) {
-            console.log(ujournal);
-            var pageJournals = ujournal;
-            console.log("**");
-
-            res.render('journals.pug', { user: req.user, journals: pageJournals });
-
+        
+        var pageJournals = ujournal;
+        res.render('journals.pug', { user: req.user, journals: pageJournals });
     })
-
-
 });
 
 
@@ -158,5 +163,60 @@ router.post('/journals', function (req, res, next) {
 
     
 });
+
+/* Provides the create journals page */
+router.get('/journal/:jid', function (req, res, next) {
+
+    var name = req.user.username;
+    var journalId = req.params.jid;
+
+    console.log(name);
+    console.log(journalId);
+
+    //journal.find({ username: 'flufy174' })
+    //var pageJournals =
+    userEntry.find({ userName: name, parentID: journalId }, function (err, uentries) {
+        var pageEntries = uentries;
+        res.render('entries.pug/', { user: req.user, entries: pageEntries, journalId: journalId });
+            
+    })
+
+    //res.render('createJournals.pug', { user: req.user,  });
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
+/* Provides the create journals page */
+router.get('/entryeditor/:id', function (req, res, next) {
+    res.render('entryeditor.pug', { user: req.user, journalId: req.params.id});
+});
+
+/* Provides the create journals page */
+router.post('/entryeditor/:id', function (req, res, next) {
+
+    //var userJournal = mongoose.model('Journal', journal)
+    var name = req.user.username;
+    //console.log(name);
+    console.log(req.body.entry + '*');
+    console.log(req.body.userEntry + '**');
+
+    var userSubmitEntry = new userEntry({
+        parentID: req.params.id,
+        journalName: 'Temp',
+        description: req.body.userEntry,
+        timestamp: 'Temp',
+        userName: req.user.username,
+    });
+
+    userSubmitEntry.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+    })
+    console.log(req.body)
+    res.redirect('/journals')
+
+    //res.redirect('createJournals.pug', { user: req.user });
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
 
 module.exports = router;

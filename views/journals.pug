@@ -28,8 +28,8 @@ block content
 						li.nav-item
 							a.nav-link(href='signin') Sign Out
 			.createJournalButton
-				form(method="GET", action="/createJournal", id="create")
-					button#addJournalButton + Create A New Journal
+				//form(method="GET", action="/createJournal", id="create")
+					///button#addJournalButton + Create A New Journal
 			#overlay
 			#popup
 				.popupForm
@@ -42,8 +42,8 @@ block content
 							button#createButton Create
 							button#cancelButton Cancel
 			- for (var i = 0; i < journals.length; i++) {
-				-var id = journals._id;
-				form(method="GET", action=id, id="entry")
+				-var jid = journals[i]._id;
+				form(method="GET", action='/journal/' + jid, id="entry")
 					.clickablePanel(onclick="document.getElementById('entry').submit();")
 						.heading
 							| #{journals[i].journalName}

@@ -8,20 +8,18 @@ block content
                 h1 Professional Journal
                 ul.nav.nav-tabs.nav-fill
                     li.nav-item
-                        a.nav-link(href='#') Journals
-                    li.nav-item
-                        a.nav-link(href='search') Advanced Search
+                        a.nav-link(href='/journals') Journals
                     li.nav-item
                         a.nav-link(href='signin') Sign Out
 
         .alignCenter
+        form(method="POST", action="/entryeditor/" + journalId)
             br
             br
-            textarea(id="entry" rows="30" cols="100")
+            textarea(id="entry" rows="30" cols="100" name="userEntry")
                 | This is the Journal Text Area
-        .alignRight
             button(type='save') Save
-            //put this in bottom right corner? help
+                //put this in bottom right corner? help
             label Last Save: Blah Blah
 
-            //get this bottom part to work - send it to mongo and load from mongo
+                //get this bottom part to work - send it to mongo and load from mongo
