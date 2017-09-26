@@ -1,19 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-<<<<<<< HEAD
-    "\\models",
     "\\routes",
     "\\views"
   ],
-=======
-    "\\public",
-    "\\public\\javascripts",
-    "\\public\\stylesheets",
-    "\\routes",
-    "\\views"
-  ],
-  "SelectedNode": "\\public\\stylesheets\\main.css",
->>>>>>> Development
+  "SelectedNode": "\\routes\\index.js",
   "PreviewInSolutionExplorer": false
 }

@@ -1,10 +1,12 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
+var mongo = require('mongodb');
 var passport = require('passport');
 var User = require('../models/user');
 var mongoose = require('mongoose');
 var router = express.Router();
 var bodyParser = require('body-parser');
+
 
 var journal = new mongoose.Schema({
     journalID: String,
@@ -15,7 +17,6 @@ var journal = new mongoose.Schema({
 });
 
 var entry = new mongoose.Schema({
-    EntryID: String,
     parentID: String,
     journaName: String,
     description: String,
@@ -23,6 +24,15 @@ var entry = new mongoose.Schema({
     userName: String,
 });
 
+var entryRecord = new mongoose.Schema({
+    parentID: String,
+    description: String,
+    timestamp: String,
+    userName: String,
+});
+
+
+var entryRecord = mongoose.model('entryRecord', entryRecord)
 var userJournal = mongoose.model('Journal', journal)
 var userEntry = mongoose.model('Entry', entry)
 router.use(bodyParser.json());
@@ -170,11 +180,6 @@ router.get('/journal/:jid', function (req, res, next) {
     var name = req.user.username;
     var journalId = req.params.jid;
 
-    console.log(name);
-    console.log(journalId);
-
-    //journal.find({ username: 'flufy174' })
-    //var pageJournals =
     userEntry.find({ userName: name, parentID: journalId }, function (err, uentries) {
         var pageEntries = uentries;
         res.render('entries.pug/', { user: req.user, entries: pageEntries, journalId: journalId });
@@ -216,6 +221,61 @@ router.post('/entryeditor/:id', function (req, res, next) {
 
     //res.redirect('createJournals.pug', { user: req.user });
     //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
+/* Provides the create journals page */
+router.get('/entrychanger/:jid/:id', function (req, res, next) {
+
+    var o_id = new mongo.ObjectID(req.params.id);
+    var name = req.user.username;
+    var currentRecord = null;
+    var oldRecords = null;
+
+    userEntry.find({ userName: name, 'parentID': req.params.id}, function (err, uRecords) {
+        oldRecords = uRecords;
+        console.log(uRecords);
+        userEntry.findOne({ userName: name, '_id': req.params.id }, function (err, uentries) {
+            currentRecord = uentries;
+
+            res.render('entrychanger.pug', { user: req.user, journalId: req.params.jid, oldRecords: oldRecords, currentRecord: currentRecord });
+        })
+    })
+
+    
+    
+
+    
+});
+
+router.post('/entrychanger/:jid/:id', function (req, res, next) {
+
+
+    var objectId = mongo.ObjectID;
+    var newObjectID = new objectId;
+    var name = req.user.username;
+    console.log(newObjectID + '');
+    var o_id = new mongo.ObjectID(req.params.id);
+
+    var userEntryRecord = new userEntry({
+        _id: newObjectID,
+        parentID: req.params.jid,
+        journalName: 'Temp',
+        description: req.body.userEntry,
+        timestamp: 'Temp',
+        userName: req.user.username,
+    });
+
+    userEntry.collection.updateMany({ userName: name, '_id': o_id },
+        { $set: { parentID: newObjectID + '' } });
+    userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
+        { $set: { parentID: newObjectID + '' } });
+
+    userEntryRecord.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+        res.redirect('/journal' + '/' + req.params.jid);
+    })
+    
 });
 
 

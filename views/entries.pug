@@ -36,13 +36,13 @@ block content
 							button#createButton Create
 							button#cancelButton Cancel
 			- for (var i = 0; i < entries.length; i++) {
-			
-
-				.clickablePanel(onclick="/")
-					.heading
-						| #{entries[i].journalName}
-					.body
-						p!= entries[i].description
+				form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
+				p= entries[i]._id
+					.clickablePanel(onclick='document.getElementById("' + i + '").submit();')
+						.heading
+							| #{entries[i].journalName}
+						.body
+							p!= entries[i].description
 						
 				
 			- }

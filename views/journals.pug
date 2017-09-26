@@ -43,8 +43,9 @@ block content
 							button#cancelButton Cancel
 			- for (var i = 0; i < journals.length; i++) {
 				-var jid = journals[i]._id;
-				form(method="GET", action='/journal/' + jid, id="entry")
-					.clickablePanel(onclick="document.getElementById('entry').submit();")
+				p= jid
+				form(method="GET", action='/journal/' + jid, id='' + i)
+					.clickablePanel(onclick='document.getElementById("' + i + '" ).submit();')
 						.heading
 							| #{journals[i].journalName}
 						.body

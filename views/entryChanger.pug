@@ -1,0 +1,32 @@
+extends template
+
+block content
+    .container-fluid
+        header
+            .container
+                // Keeps nav at center of screen
+                h1 Professional Journal
+                ul.nav.nav-tabs.nav-fill
+                    li.nav-item
+                        a.nav-link(href='/journals') Journals
+                    li.nav-item
+                        a.nav-link(href='signin') Sign Out
+
+        .alignCenter
+        form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
+            br
+            br
+            textarea(id="entry" rows="30" cols="100" name="userEntry")
+                p!= currentRecord.description
+            button(type='save') Save
+                //put this in bottom right corner? help
+            label Last Save: Blah Blah
+            - for(i = 0; i < oldRecords.length; i++){
+                .clickablePanel()
+                    .body
+                        p!=oldRecords[i].description
+            - }
+
+            
+
+                //get this bottom part to work - send it to mongo and load from mongo
