@@ -21,15 +21,20 @@ h1 {
     margin-top: 30px;
     width: 400px;
     border: 1px solid darkblue;
-    padding: 40px;  
+    padding: 35px;  
     background: #eff0f2;
 }
+
+button:hover{
+    cursor:pointer;
+}
+
 
 .addPaddingToChildren > * {
 	padding: 15px;
 }
 /*Style for the form input fields*/
-.formInput input[type=text], input[type=password] {
+.formInput input[type=text], input[type=password], input[type=email] {
 	padding: 8px 20px;
 	margin: 10px 0;
 	width: 320px;

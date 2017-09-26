@@ -89,7 +89,7 @@ router.get('/searchJournals', function (req, res, next) {
 router.post('/signin', passport.authenticate('local'), function (req, res) {
     //console.log(user.username)
     res.redirect('/journals');
-
+});
 //Show the main search page
 router.get('/search', function (req, res, next) {
 	res.render('search.pug')
@@ -99,7 +99,7 @@ router.get('/entry',function(req, res, next){
     res.render('entryeditor.pug')
 });
 
-});
+
 
 //Show the login page
 router.get('/signin', function (req, res, next) {
