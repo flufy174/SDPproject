@@ -41,7 +41,7 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
-			- for (var i = 0; i < journals.length; i++) {
+			- for (var i = journals.length - 1; i >= 0; i--) {
 				-var jid = journals[i]._id;
 				p= jid
 				form(method="GET", action='/journal/' + jid, id='' + i)

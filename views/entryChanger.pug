@@ -21,7 +21,7 @@ block content
             button(type='save') Save
                 //put this in bottom right corner? help
             label Last Save: Blah Blah
-            - for(i = 0; i < oldRecords.length; i++){
+            - for(var i = oldRecords.length - 1; i >= 0; i--){
                 .clickablePanel()
                     .body
                         p!=oldRecords[i].description

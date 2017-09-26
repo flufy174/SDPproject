@@ -35,7 +35,7 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
-			- for (var i = 0; i < entries.length; i++) {
+			- for (var i = entries.length - 1; i >= 0; i--) {
 				form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 				p= entries[i]._id
 					.clickablePanel(onclick='document.getElementById("' + i + '").submit();')
