@@ -12,31 +12,27 @@ block content
 			h3 Create Account
 			p #{errormsg}
 			
-			br
-			form(method='POST', action='/register', id='register')
+			form.formInput(method='POST', action='/register', id='registerForm')
 				
-				|Full Name
-				br
+				label(for='name') Full Name
 				input(type='text', name='name', placeholder='Enter Full Name')
-				br
-				|Username
-				br
+				label(for='username') Username
 				input(type='text', name='username', placeholder='Username')
-				br
-				|Email
-				br
+				label(for='email') Email 
 				input(type='email', name='email', placeholder='Enter your email address')
-				br
-				|Password
-				br
+				label(for='password') Password 
 				input(type='password', name='password', placeholder='Enter Password')
-				br
-				|Confirm Password
-				br
+				label(for='password-confirm') Confirm Password
 				input(type='password', name='password-confirm', placeholder='Enter Password Again')
+				label(for='user-color') Color in HEX (#FFFFFF)
+				input(type='text', name='user-color', placeholder='Enter Your Favourite Color')
 				br
-				|Color in HEX (#FFFFFF)
-				input(type='text', name='usercolor', placeholder='Enter Your Favourite Color')
 				br
-				br
-				a.btn.btn-primary.btn-block(onclick="document.getElementById('register').submit();") Register
+				//a.btn.btn-primary.btn-block(onclick="document.getElementById('register').submit();") Register
+				button#registerBtn.btn.btn-primary.btn-block(type='submit') Register
+
+
+	script.
+		document.getElementById('registerBtn').addEventListener("click", function(){
+			document.getElementById('registerForm').submit();
+		})
