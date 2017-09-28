@@ -90,11 +90,6 @@ router.get('/journals', function (req, res, next) {
     })
 });
 
-
-router.get('/searchJournals', function (req, res, next) {
-    res.render('searchJournals.pug')
-});
-
 /* Logs the user in */
 router.post('/signin', passport.authenticate('local'), function (req, res) {
     //console.log(user.username)
@@ -102,7 +97,7 @@ router.post('/signin', passport.authenticate('local'), function (req, res) {
 });
 //Show the main search page
 router.get('/search', function (req, res, next) {
-	res.render('search.pug')
+	res.render('search.pug', { user: req.user});
 });
 
 router.get('/entry',function(req, res, next){

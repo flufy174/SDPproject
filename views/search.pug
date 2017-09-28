@@ -8,7 +8,7 @@ block content
 				h1 Professional Journal
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
-						a.nav-link(href='journals') Journals
+						a.nav-link(href='journals') Journals #{user.colour_choice}
 					li.nav-item
 						.navSearch
 							input.searchTerm(type='text', placeholder='Search All Journals')
@@ -124,5 +124,10 @@ block content
 					endDf.value = beginDate;
 				}
 			};
+	script.
+		var colour = '#' + #{usercolor}
+		$(document).ready(function(){
+			$("h1").css("color", "#{user.colour_choice}");
+		});
 				
 			
