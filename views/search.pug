@@ -3,9 +3,9 @@ extends template
 block content
 	.container-fluid
 		header
-			
 			.container
 				h1 Professional Journal
+				h3 Welcome #{user.full_name}
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
 						a.nav-link(href='journals') Journals #{user.colour_choice}

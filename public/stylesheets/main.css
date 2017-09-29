@@ -3,8 +3,7 @@
 header {
     color: darkblue;
 }
-
-h1 {
+h1{
     text-align: center;
 }
 
@@ -96,6 +95,11 @@ button:hover{
 .createSearchButton {
     text-align: center;
     padding-top: 2%;
+}
+
+.createEntryButton {
+	text-align: center;
+	padding-top: 2%;
 }
 
 #myUL {

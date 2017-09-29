@@ -1,32 +1,38 @@
 extends template
 
 block content
-    .container-fluid
-        header
-            .container
-                // Keeps nav at center of screen
-                h1 Professional Journal
-                ul.nav.nav-tabs.nav-fill
-                    li.nav-item
-                        a.nav-link(href='/journals') Journals
-                    li.nav-item
-                        a.nav-link(href='signin') Sign Out
+	.container-fluid
+		header
+			.container
+				// Keeps nav at center of screen
+				h1 Professional Journal
+				ul.nav.nav-tabs.nav-fill
+						li.nav-item
+							a.nav-link(href='/journals') Journals
+						li.nav-item
+							.navSearch
+								input.searchTerm(type='text', placeholder='Search All Journals')
+								button.searchButton(type='submit')
+									i.fa.fa-search
+							a.nav-link(href='/search') Advanced Search
+						li.nav-item
+							a.nav-link(href='signin') Sign Out
 
-        .alignCenter
-        form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
-            br
-            br
-            textarea(id="entry" rows="30" cols="100" name="userEntry")
-                p!= currentRecord.description
-            button(type='save') Save
-                //put this in bottom right corner? help
-            label Last Save: Blah Blah
-            - for(var i = oldRecords.length - 1; i >= 0; i--){
-                .clickablePanel()
-                    .body
-                        p!=oldRecords[i].description
-            - }
+		.alignCenter
+		form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
+			br
+			br
+			textarea(id="entry" rows="30" cols="100" name="userEntry")
+				p!= currentRecord.description
+			button(type='save') Save
+				//put this in bottom right corner? help
+			label Last Save: Blah Blah
+			- for(var i = oldRecords.length - 1; i >= 0; i--){
+				.clickablePanel()
+					.body
+						p!=oldRecords[i].description
+			- }
 
-            
+			
 
-                //get this bottom part to work - send it to mongo and load from mongo
+				//get this bottom part to work - send it to mongo and load from mongo

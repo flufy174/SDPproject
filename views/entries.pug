@@ -12,18 +12,26 @@ block content
 		.container-fluid
 			header
 				.container
-					// Keeps nav at center of screen
-					h1 ENTRIES
+					h1 Professional Journal
 					if (user)
 						h3 Welcome #{user.full_name}
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
-							a.nav-link.active(href='#') Entries
+							a.nav-link(href='/journals') Journals
+						li.nav-item
+							.navSearch
+								input.searchTerm(type='text', placeholder='Search All Journals')
+								button.searchButton(type='submit')
+									i.fa.fa-search
+							a.nav-link(href='/search') Advanced Search
 						li.nav-item
 							a.nav-link(href='signin') Sign Out
+			//display Journal Name here instead
+			br
+			h3.alignCenter #{journalID} 
 			.createJournalButton
 				form(method="GET", action="/entryeditor/" + journalID, id="create")
-					button#addJournalButton + Create A Entry
+					button#addJournalButton + Create An Entry
 			#overlay
 			#popup
 				.popupForm
@@ -35,14 +43,27 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
-			- for (var i = entries.length - 1; i >= 0; i--) {
-				form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
-				p= entries[i]._id
-					.clickablePanel(onclick='document.getElementById("' + i + '").submit();')
-						.heading
-							| #{entries[i].journalName}
-						.body
-							p!= entries[i].description
-						
-				
-			- }
+			.panel
+				.heading
+					| Entries
+				.body
+					table(style="width:100%")
+						tr
+							th Journal Entry Name
+							th Date Created
+							th History
+							th Hide
+							th Delete
+						- for (var i = entries.length - 1; i >= 0; i--) {
+						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
+						tr
+							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
+								!= entries[i]._id
+							td #{entries[i].timestamp}
+							td 
+								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="alert('Go to history of entry')")
+							td
+								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="alert('Hide entry')")
+							td  											
+								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="alert('Delete entry')")
+						- }	

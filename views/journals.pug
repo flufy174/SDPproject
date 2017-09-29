@@ -24,12 +24,12 @@ block content
 								input.searchTerm(type='text', placeholder='Search All Journals')
 								button.searchButton(type='submit')
 									i.fa.fa-search
-							a.nav-link.active(href='search') Advanced Search
+							a.nav-link(href='search') Advanced Search
 						li.nav-item
 							a.nav-link(href='signin') Sign Out
 			.createJournalButton
-				//form(method="GET", action="/createJournal", id="create")
-					///button#addJournalButton + Create A New Journal
+				form(method="GET", action="/createJournal", id="create")
+					button#addJournalButton + Create A New Journal
 			#overlay
 			#popup
 				.popupForm
