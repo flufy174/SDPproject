@@ -4,11 +4,11 @@ block content
 	.container-fluid
 		header
 			.container
-				h1 Professional Journal
-				h3 Welcome #{user.full_name}
+				h1 Professional Journal #{user.colour_choice}
+				h3 Welcome
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
-						a.nav-link(href='journals') Journals #{user.colour_choice}
+						a.nav-link(href='journals') Journals
 					li.nav-item
 						.navSearch
 							input.searchTerm(type='text', placeholder='Search All Journals')
@@ -19,7 +19,7 @@ block content
 						a.nav-link(href='signin') Sign Out
 
 		.panel
-			.heading Search All Journals
+			.heading(id="heading1") Search All Journals
 			.body.alignCenter
 				
 				.wrap
@@ -125,9 +125,40 @@ block content
 				}
 			};
 	script.
-		var colour = '#' + #{usercolor}
-		$(document).ready(function(){
-			$("h1").css("color", "#{user.colour_choice}");
+		$(document).ready(function () {
+			SetContrast("#{user.colour_choice}");
+
+			function HexToRgb(hex) {
+				var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+				return result ? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16)
+				} : null;
+			}
+
+			function SetContrast(hex) {
+
+				var red = HexToRgb(hex).r;
+				var green = HexToRgb(hex).g;
+				var blue = HexToRgb(hex).b;
+
+
+				var o = Math.round(((red * 299) +
+					(green * 587) +
+					(blue * 114)) / 1000);
+				console.log(o);
+
+				var fore = (o > 125) ? 'black' : 'white';
+				var back = 'rgb(' + red + ',' + green + ',' + blue + ')';
+				$('#heading1').css('color', fore);
+				$('#heading1').css('background-color', back);
+			}
 		});
+
+
+
+
+
 				
 			
