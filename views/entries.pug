@@ -43,6 +43,40 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
+
+			//Search Bar
+			.panel
+				.heading.collapsible(data-toggle='collapse', href='#collapse1')
+					|Search Entries  
+					i.fa.fa-arrow-right
+				#collapse1.panel-collapse.collapse
+					.body.alignCenter
+						.wrap
+							.advSearch
+								input#myInput.searchTerm(type='text', placeholder='Keywords')
+								button.searchButton(type='submit')
+									i.fa.fa-search
+						br
+						br
+						
+						|Search Date Between
+						br
+						label(for='begin') From:  
+						input#beginDf(type='date' name='date' max='2000-13-13')
+						label(for='end') To:  
+						input#endDf(type='date' name='date' min='2000-13-13' max='2000-13-13')
+						br
+						.addPaddingToChildren
+							input#showHidden(type='checkbox')
+							label(for='showHidden') Show Hidden
+							input#showArchived(type='checkbox')
+							label(for='showArchived') Show Archived
+							input#showVisible(type='checkbox', checked)
+							label(for='showVisible') Show Visible
+							br
+							button.btn.btn-primary#applyBtn(type='button') Apply
+
+			//Entry Table
 			.panel
 				.heading
 					| Entries
@@ -66,4 +100,38 @@ block content
 								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="alert('Hide entry')")
 							td  											
 								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="alert('Delete entry')")
-						- }	
+						- }
+
+
+	script.
+		//Get todays date
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		if(dd<10){
+			dd='0'+dd
+		} 
+		if(mm<10){
+			mm='0'+mm
+		}
+		today = yyyy+'-'+mm+'-'+dd;
+
+		var beginDf = document.getElementById("beginDf");
+		var endDf = document.getElementById("endDf");
+
+		//Set the max date to todays date
+		beginDf.setAttribute("max", today);
+		endDf.setAttribute("max", today);
+
+		//When the begin date is set, put a constraint on the end date
+		beginDf.onchange = function(){
+			endDf.setAttribute("min", beginDf.value);
+			//If the user has set the begin date to a date that is after the end date
+			//Then set the end date to the begin date, to prevent any errors
+			//Also check if beginDate has been cleared
+			var beginDate = beginDf.value;
+			if (beginDate > endDf.value || !beginDate){
+				endDf.value = beginDate;
+			}
+		};
