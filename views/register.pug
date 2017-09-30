@@ -12,27 +12,21 @@ block content
 			h3 Create Account
 			p #{errormsg}
 			
-			form.formInput(method='POST', action='/register', id='registerForm')
+			form.formInput(action='/register', method='post')
 				
-				label(for='name') Full Name
+				label Full Name
 				input(type='text', name='name', placeholder='Enter Full Name')
-				label(for='username') Username
+				label Username
 				input(type='text', name='username', placeholder='Username')
-				label(for='email') Email 
+				label Email
 				input(type='email', name='email', placeholder='Enter your email address')
-				label(for='password') Password 
+				label Password
 				input(type='password', name='password', placeholder='Enter Password')
-				label(for='password-confirm') Confirm Password
+				label Confirm Password
 				input(type='password', name='password-confirm', placeholder='Enter Password Again')
-				label(for='user-color') Color in HEX (#FFFFFF)
+				label Color in HEX (#FFFFFF)
 				input(type='text', name='usercolor', placeholder='Enter Your Favourite Color')
 				br
 				br
 				//a.btn.btn-primary.btn-block(onclick="document.getElementById('register').submit();") Register
 				button#registerBtn.btn.btn-primary.btn-block(type='submit') Register
-
-
-	script.
-		document.getElementById('registerBtn').addEventListener("click", function(){
-			document.getElementById('registerForm').submit();
-		})
