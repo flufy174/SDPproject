@@ -21,18 +21,15 @@ block content
 		.alignCenter
 		form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
 			br
+			.container
+				input(type='text', name='entry_name', placeholder='Enter Entry Name')
+				button(type='save') Save Entry
+				label Last Edited On: timestamp
 			br
 			textarea(id="entry" rows="30" cols="100" name="userEntry")
 				p!= currentRecord.description
-			button(type='save') Save
-				//put this in bottom right corner? help
-			label Last Save: Blah Blah
 			- for(var i = oldRecords.length - 1; i >= 0; i--){
 				.clickablePanel()
 					.body
 						p!=oldRecords[i].description
 			- }
-
-			
-
-				//get this bottom part to work - send it to mongo and load from mongo

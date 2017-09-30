@@ -20,11 +20,10 @@ block content
 		.alignCenter
 		form(method="POST", action="/entryeditor/" + journalId)
 			br
+			.container
+				input(type='text', name='entry_name', placeholder='Enter Entry Name')
+				button(type='save') Save Entry
+				label Last Edited On: INSERT TIMESTAMP HERE
 			br
 			textarea(id="entry" rows="30" cols="100" name="userEntry")
 				| This is the Journal Text Area
-			button(type='save') Save
-				//put this in bottom right corner? help
-			label Last Save: Blah Blah
-
-				//get this bottom part to work - send it to mongo and load from mongo

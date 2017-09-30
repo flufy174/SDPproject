@@ -193,6 +193,18 @@ router.get('/entryeditor/:id', function (req, res, next) {
 /* Provides the create journals page */
 router.post('/entryeditor/:id', function (req, res, next) {
 
+    //code that provides and formats the timestamp for the journal
+    timestamp = new Date(Date.now()),
+        timestampvalues = [
+            timestamp.getFullYear(),
+            timestamp.getMonth() + 1,
+            timestamp.getDate(),
+            timestamp.getHours(),
+            timestamp.getMinutes(),
+            timestamp.getSeconds(),
+        ];
+
+
     //var userJournal = mongoose.model('Journal', journal)
     var name = req.user.username;
     //console.log(name);
@@ -203,7 +215,7 @@ router.post('/entryeditor/:id', function (req, res, next) {
         parentID: req.params.id,
         journalName: 'Temp',
         description: req.body.userEntry,
-        timestamp: 'Temp',
+        timestamp: timestamp,
         userName: req.user.username,
     });
 
@@ -251,12 +263,22 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
     console.log(newObjectID + '');
     var o_id = new mongo.ObjectID(req.params.id);
 
+    timestamp = new Date(Date.now()),
+        timestampvalues = [
+            timestamp.getFullYear(),
+            timestamp.getMonth() + 1,
+            timestamp.getDate(),
+            timestamp.getHours(),
+            timestamp.getMinutes(),
+            timestamp.getSeconds(),
+        ];
+
     var userEntryRecord = new userEntry({
         _id: newObjectID,
         parentID: req.params.jid,
         journalName: 'Temp',
         description: req.body.userEntry,
-        timestamp: 'Temp',
+        timestamp: timestamp,
         userName: req.user.username,
     });
 

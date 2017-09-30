@@ -24,6 +24,11 @@ h1{
     background: #eff0f2;
 }
 
+.button {
+    margin: 15px;
+    padding: 10px;
+}
+
 button:hover{
     cursor:pointer;
 }
@@ -41,7 +46,8 @@ button:hover{
 
 .popupInput input[type=text]{
 	width: 250px;
-	margin: 10px 0;
+	margin: 20px;
+    padding: 10px;
 }
 
 /* PANELS */
