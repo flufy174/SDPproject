@@ -36,17 +36,19 @@ block content
 					form(method="POST", action="/createJournals", id="create")
 						x
 						br
+						//This should be removed (its the wrong popup thing)
 						input#journalName(type='text', name='journalName', placeholder='Enter Journal Name')
 						br
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
+						//^^^^^^
 			- for (var i = journals.length - 1; i >= 0; i--) {
 				-var jid = journals[i]._id;
 				p= jid
 				form(method="GET", action='/journal/' + jid, id='' + i)
 					.clickablePanel(onclick='document.getElementById("' + i + '" ).submit();')
-						.heading
+						.heading(id="journalHeading")
 							| #{journals[i].journalName}
 						.body
 							| #{journals[i].description}
@@ -84,3 +86,37 @@ block content
 						alert('Journal created with name: ' + journalName);
 					}
 				};
+			script.
+				$(document).ready(function () {
+					SetContrast("#{user.colour_choice}");
+
+
+
+				function HexToRgb(hex) {
+					var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+					return result ? {
+						r: parseInt(result[1], 16),
+						g: parseInt(result[2], 16),
+						b: parseInt(result[3], 16)
+					} : null;
+				}
+
+				function SetContrast(hex) {
+
+					var red = HexToRgb(hex).r;
+					var green = HexToRgb(hex).g;
+					var blue = HexToRgb(hex).b;
+
+
+					var o = Math.round(((red * 299) +
+						(green * 587) +
+						(blue * 114)) / 1000);
+					console.log(o);
+
+					var fore = (o > 125) ? 'black' : 'white';
+					var back = 'rgb(' + red + ',' + green + ',' + blue + ')';
+
+					$('.heading').css('color', fore);
+					$('.heading').css('background-color', back);
+
+				}});

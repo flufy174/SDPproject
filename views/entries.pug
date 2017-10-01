@@ -66,4 +66,38 @@ block content
 								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="alert('Hide entry')")
 							td  											
 								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="alert('Delete entry')")
-						- }	
+						- }
+				script.
+					$(document).ready(function () {
+						SetContrast("#{user.colour_choice}");
+
+
+						function HexToRgb(hex) {
+							var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+							return result ? {
+								r: parseInt(result[1], 16),
+								g: parseInt(result[2], 16),
+								b: parseInt(result[3], 16)
+							} : null;
+						}
+
+						function SetContrast(hex) {
+
+							var red = HexToRgb(hex).r;
+							var green = HexToRgb(hex).g;
+							var blue = HexToRgb(hex).b;
+
+
+							var o = Math.round(((red * 299) +
+								(green * 587) +
+								(blue * 114)) / 1000);
+							console.log(o);
+
+							var fore = (o > 125) ? 'black' : 'white';
+							var back = 'rgb(' + red + ',' + green + ',' + blue + ')';
+
+							$('.heading').css('color', fore);
+							$('.heading').css('background-color', back);
+
+						}
+					});
