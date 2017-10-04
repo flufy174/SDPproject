@@ -42,9 +42,6 @@ router.use(bodyParser.urlencoded({ extended: true}));
 var url = "mongodb://localhost:27017/users";
 
 
-
-
-
 //Show the registration page
 router.get('/register', function (req, res, next) {
 	res.render('register.pug', {errormsg: null})
