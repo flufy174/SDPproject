@@ -5,23 +5,21 @@ block content
 		header
 			.container
 				h1 Professional Journal
-				h3 Welcome #{user.full_name}
 				ul.nav.nav-tabs.nav-fill
 					li.nav-item
-						a.nav-link(href='journals') Journals #{user.colour_choice}
+						a.nav-link(href='/journals') Journals #{user.colour_choice}
 					li.nav-item
-						.navSearch
-							input.searchTerm(type='text', placeholder='Search All Journals')
-							button.searchButton(type='submit')
-								i.fa.fa-search
-						a.nav-link.active(href='search') Advanced Search
-					li.nav-item
-						a.nav-link(href='signin') Sign Out
+						a.nav-link.active(href='/search') Search
+					li.nav-item.dropdown
+						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') My Account
+						.dropdown-menu
+							a.dropdown-item(href='/profile-details') Profile
+							.dropdown-divider
+							a.dropdown-item(href='') Sign Out
 
 		.panel
 			.heading Search All Journals
 			.body.alignCenter
-				
 				.wrap
 					.advSearch
 						input#myInput.searchTerm(type='text', placeholder='Keywords')
@@ -32,10 +30,11 @@ block content
 				
 				|Search Date Between
 				br
-				label(for='begin') From:  
-				input#beginDf(type='date' name='date' max='2000-13-13')
-				label(for='end') To:  
-				input#endDf(type='date' name='date' min='2000-13-13' max='2000-13-13')
+				//label(for='begin') From 
+				input#beginDf(type='date' name='date' max='2000-13-13' placeholder="From")
+				
+				//label(for='end') To
+				input#endDf(type='date' name='date' min='2000-13-13' max='2000-13-13' placeholder="To")
 				br
 				.addPaddingToChildren
 					input#showHidden(type='checkbox')
@@ -93,6 +92,7 @@ block content
 				}
 			};
 
+
 			//Get todays date
 			var today = new Date();
 			var dd = today.getDate();
@@ -127,7 +127,7 @@ block content
 	script.
 		var colour = '#' + #{usercolor}
 		$(document).ready(function(){
-			$("h1").css("color", "#{user.colour_choice}");
+			//$("h1").css("color", "#{user.colour_choice}");
 		});
 				
 			

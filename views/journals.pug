@@ -14,19 +14,19 @@ block content
 				.container
 					// Keeps nav at center of screen
 					h1 Professional Journal
-					if (user)
-						h3 Welcome #{user.full_name}
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
-							a.nav-link.active(href='#') Journals
+							a.nav-link.active(href='') Journals
 						li.nav-item
-							.navSearch
-								input.searchTerm(type='text', placeholder='Search All Journals')
-								button.searchButton(type='submit')
-									i.fa.fa-search
-							a.nav-link(href='search') Advanced Search
-						li.nav-item
-							a.nav-link(href='signin') Sign Out
+							a.nav-link(href='/search') Search
+						li.nav-item.dropdown
+							a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
+							.dropdown-menu
+								a.dropdown-item(href='/profile-details') Profile
+								.dropdown-divider
+								a.dropdown-item(href='') Sign Out
+					br
+					h3 Welcome #{user.full_name}
 			.createJournalButton
 				form(method="GET", action="/createJournal", id="create")
 					button#addJournalButton + Create A New Journal
@@ -43,7 +43,7 @@ block content
 							button#cancelButton Cancel
 			- for (var i = journals.length - 1; i >= 0; i--) {
 				-var jid = journals[i]._id;
-				p= jid
+				//p= jid
 				form(method="GET", action='/journal/' + jid, id='' + i)
 					.clickablePanel(onclick='document.getElementById("' + i + '" ).submit();')
 						.heading
@@ -53,34 +53,3 @@ block content
 						
 				
 			- }
-			//Popup functionality
-			script(src="/javascripts/popup.js")
-			script.
-				window.onload = function() {
-					document.getElementById("addJournalButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup")
-					overlay.style.display = "block";
-					popup.style.display = "block";
-				};
-	
-				document.getElementById("cancelButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup");
-					overlay.style.display = "none";
-					popup.style.display = "none";
-				};
-
-				document.getElementById("createButton").onclick = function(){
-					var overlay = document.getElementById("overlay");
-					var popup = document.getElementById("popup");
-					overlay.style.display = "none";
-					popup.style.display = "none";
-					var journalName = document.getElementById("journalName").value;
-					if(journalName == "") {
-						alert('Please enter a name for the journal');
-					}
-					else {
-						alert('Journal created with name: ' + journalName);
-					}
-				};

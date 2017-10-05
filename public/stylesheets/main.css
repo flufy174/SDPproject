@@ -1,11 +1,16 @@
 
 
 header {
-    color: darkblue;
+    color: #000000;
 }
 h1{
     text-align: center;
 }
+
+.bold{
+    font-weight: bold;
+}
+
 
 .alignCenter{
 	text-align: center;
