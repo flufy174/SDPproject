@@ -110,6 +110,14 @@ router.get('/signin', function (req, res, next) {
     res.render('login.pug', { user: req.user });
 });
 
+router.get('/profile-details', function(req, res, next){
+    res.render('profileChangeDetails.pug', {user: req.user});
+});
+
+router.get('/profile-password', function(req, res, next){
+    res.render('profileChangePassword.pug', {user: req.user});
+});
+
 
 /*NOT COMPLETE*/
 router.get('/logout', function (req, res) {
