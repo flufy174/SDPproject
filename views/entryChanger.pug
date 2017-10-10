@@ -22,7 +22,8 @@ block content
 		form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
 			br
 			.container
-				input(type='text', name='entry_name', placeholder='Enter Entry Name')
+				input(id="entry_name", type='text', name='entry_name', value= "" + currentRecord.entryName)
+				
 				button(type='save') Save Entry
 				label Last Edited On: timestamp
 			br

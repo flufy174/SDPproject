@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\routes",
+    "\\public\\javascripts",
     "\\views"
   ],
-  "SelectedNode": "\\views\\entryChanger.pug",
+  "SelectedNode": "\\views\\_bootstrap.pug",
   "PreviewInSolutionExplorer": false
 }

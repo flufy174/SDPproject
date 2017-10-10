@@ -28,7 +28,7 @@ block content
 							a.nav-link(href='signin') Sign Out
 			//display Journal Name here instead
 			br
-			h3.alignCenter #{journalID} 
+			h3.alignCenter 
 			.createJournalButton
 				form(method="GET", action="/entryeditor/" + journalID, id="create")
 					button#addJournalButton + Create An Entry
@@ -55,17 +55,19 @@ block content
 							th Hide
 							th Delete
 						- for (var i = entries.length - 1; i >= 0; i--) {
+						- if (entries[i].hidden == false){
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
-								!= entries[i]._id
+								!= entries[i].entryName
 							td #{entries[i].timestamp}
 							td 
-								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="alert('Go to history of entry')")
+								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
 							td
-								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="alert('Hide entry')")
+								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="window.location='/hide/" + journalId + "/" + entries[i]._id + "'")
 							td  											
-								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="alert('Delete entry')")
+								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="window.location='/delete/" + journalId + "/" + entries[i]._id + "'")
+							- }
 						- }
 				script.
 					$(document).ready(function () {

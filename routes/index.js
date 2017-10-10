@@ -17,11 +17,13 @@ var journal = new mongoose.Schema({
 });
 
 var entry = new mongoose.Schema({
+    entryName: String,
     parentID: String,
     journaName: String,
     description: String,
     timestamp: String,
     userName: String,
+    hidden: Boolean
 });
 
 var entryRecord = new mongoose.Schema({
@@ -209,11 +211,13 @@ router.post('/entryeditor/:id', function (req, res, next) {
     console.log(req.body.userEntry + '**');
 
     var userSubmitEntry = new userEntry({
+        entryName: req.body.entry_name,
         parentID: req.params.id,
         journalName: 'Temp',
         description: req.body.userEntry,
         timestamp: timestamp,
         userName: req.user.username,
+        hidden: false
     });
 
     userSubmitEntry.save(function (err) {
@@ -246,9 +250,6 @@ router.get('/entrychanger/:jid/:id', function (req, res, next) {
     })
 
     
-    
-
-    
 });
 
 router.post('/entrychanger/:jid/:id', function (req, res, next) {
@@ -272,17 +273,19 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
 
     var userEntryRecord = new userEntry({
         _id: newObjectID,
+        entryName: 'Temp',
         parentID: req.params.jid,
         journalName: 'Temp',
         description: req.body.userEntry,
         timestamp: timestamp,
         userName: req.user.username,
+        hidden: false
     });
 
     userEntry.collection.updateMany({ userName: name, '_id': o_id },
-        { $set: { parentID: newObjectID + '' } });
+        { $set: { parentID: newObjectID + '', entryName: req.body.entry_name} });
     userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
-        { $set: { parentID: newObjectID + '' } });
+        { $set: { parentID: newObjectID + '', entryName: req.body.entry_name} });
 
     userEntryRecord.save(function (err) {
         if (err) return handleError(err);
@@ -290,6 +293,39 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
         res.redirect('/journal' + '/' + req.params.jid);
     })
     
+});
+
+
+/* Provides the create journals page */
+router.get('/delete/:jid/:id', function (req, res, next) {
+
+    var name = req.user.username;
+    var o_id = new mongo.ObjectID(req.params.id);
+
+    userEntry.collection.updateMany({ userName: name, '_id': o_id },
+        { $set: { parentID: req.params.id + '' } });
+    userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
+        { $set: { parentID: req.params.id + '' } });
+
+    console.log(req.params.id)
+    res.redirect('/journal/' + req.params.jid);
+
+});
+
+/* Provides the create journals page */
+router.get('/hide/:jid/:id', function (req, res, next) {
+
+    var name = req.user.username;
+    var o_id = new mongo.ObjectID(req.params.id);
+
+    userEntry.collection.updateMany({ userName: name, '_id': o_id },
+        { $set: { hidden: true} });
+    userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
+        { $set: { hidden: true} });
+
+    console.log(req.params.id)
+    res.redirect('/journal/' + req.params.jid);
+
 });
 
 

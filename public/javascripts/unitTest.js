@@ -26,7 +26,7 @@ exports.findUser = function () {
 			if (entry[0] != null) {
 				resolve(entry[0]);
 			}
-
+			return entry[0];
 		})
 	});
 
