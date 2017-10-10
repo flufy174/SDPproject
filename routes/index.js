@@ -262,7 +262,7 @@ router.get('/entrychanger/:jid/:id', function (req, res, next) {
 
 router.post('/entrychanger/:jid/:id', function (req, res, next) {
 
-
+    console.log("********")
     var objectId = mongo.ObjectID;
     var newObjectID = new objectId;
     var name = req.user.username;
@@ -289,6 +289,8 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
         userName: req.user.username,
         hidden: false
     });
+
+    console.log("****" + req.body.entry_name + "****")
 
     userEntry.collection.updateMany({ userName: name, '_id': o_id },
         { $set: { parentID: newObjectID + '', entryName: req.body.entry_name} });
