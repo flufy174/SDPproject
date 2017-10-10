@@ -6,18 +6,19 @@ block content
 		header
 			h1 Create Journal
 		.centerDetails
-			h3 Create your Journal
+			h3 Create A Journal
 			br
-			form(method='POST', action='/createJournals', id='submit')
-				|Journal name
+			form.formInput(method='POST', action='/createJournals', id='submit')
+				label(for='journalName') Journal Name
 				br
-				input(type='text', name='journalName', placeholder='Please enter your text here')
-				|Journal description
+				input(type='text', name='journalName', placeholder='Enter the name for your journal')
 				br
-				input(type='text', name='journalDescription', placeholder='Please enter the description of your jounal')
+				label(for='journalDescription') Journal Description
+				br
+				input(type='text', name='journalDescription', placeholder='Enter the description for your journal')
 				br
 				br
-				a.btn.btn-primary.btn-block(onclick="document.getElementById('submit').submit();") Save
+				button.btn.btn-primary.btn-block(onclick="document.getElementById('submit').submit();") Save
 				br
 
 		

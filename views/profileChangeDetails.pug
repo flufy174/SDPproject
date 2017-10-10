@@ -1,0 +1,50 @@
+extends template
+
+block content
+	.container-fluid
+		header
+			.container
+				h1 Professional Journal
+				ul.nav.nav-tabs.nav-fill
+					li.nav-item
+						a.nav-link(href='/journals') Journals
+					li.nav-item
+						a.nav-link(href='/search') Search
+					li.nav-item.dropdown
+						a.nav-link.dropdown-toggle.active(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') My Account
+						.dropdown-menu
+							a.dropdown-item(href='#') Profile
+							.dropdown-divider
+							a.dropdown-item(href='#') Sign Out
+		.panel
+			.heading
+				| Your Details
+			.body.alignCenter
+				.container
+					ul.nav.nav-tabs.nav-fill
+						li.nav-item.bold
+							a.nav-link().active Change Details
+						li.nav-item
+							a.nav-link(href='/profile-password') Change Password
+					form.formInput
+						br
+						label(for='name' style='font-weight: bold') Name
+						br
+						input#nameTf(type='text', name='name', value= '')
+						br
+						label(for='email' style='font-weight: bold') Email 
+						br
+						input#emailTf(type='email', name='email')
+						br
+						label(for='user-color' style='font-weight: bold') Color in HEX (#FFFFFF)
+						br
+						input#colorTf(type='text', name='usercolor')
+						br
+						br
+						button#registerBtn.btn.btn-primary(type='submit') Save
+						
+
+	script.
+		document.getElementById("nameTf").value = "#{user.full_name}";
+		document.getElementById("emailTf").value = "#{user.email_address}";
+		document.getElementById("colorTf").value = "#{user.colour_choice}";

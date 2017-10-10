@@ -13,22 +13,21 @@ block content
 			header
 				.container
 					h1 Professional Journal
-					if (user)
-						h3 Welcome #{user.full_name}
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
 							a.nav-link(href='/journals') Journals
 						li.nav-item
-							.navSearch
-								input.searchTerm(type='text', placeholder='Search All Journals')
-								button.searchButton(type='submit')
-									i.fa.fa-search
-							a.nav-link(href='/search') Advanced Search
-						li.nav-item
-							a.nav-link(href='signin') Sign Out
-			//display Journal Name here instead
+							a.nav-link(href='/search') Search
+						li.nav-item.dropdown
+							a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
+							.dropdown-menu
+								a.dropdown-item(href='/profile-details') Profile
+								.dropdown-divider
+								a.dropdown-item(href='') Sign Out
+			
 			br
-			h3.alignCenter #{journalID} 
+			//display Journal Name here instead
+			h3.alignCenter #{journalId} 
 			.createJournalButton
 				form(method="GET", action="/entryeditor/" + journalID, id="create")
 					button#addJournalButton + Create An Entry
@@ -43,6 +42,37 @@ block content
 						.popupButtons
 							button#createButton Create
 							button#cancelButton Cancel
+			//Search Bar
+			.panel
+				.heading.collapsible(data-toggle='collapse', href='#collapse1')
+					|Search Entries  
+					i.fa.fa-arrow-right
+				#collapse1.panel-collapse.collapse
+					.body.alignCenter
+						.wrap
+							.advSearch
+								input#myInput.searchTerm(type='text', placeholder='Keywords')
+								button.searchButton(type='submit')
+									i.fa.fa-search
+						br
+						br
+						
+						|Search Date Between
+						br 
+						input#beginDf(type='date' name='date' max='2000-13-13')
+						input#endDf(type='date' name='date' min='2000-13-13' max='2000-13-13')
+						br
+						.addPaddingToChildren
+							input#showHidden(type='checkbox')
+							label(for='showHidden') Show Hidden
+							input#showArchived(type='checkbox')
+							label(for='showArchived') Show Archived
+							input#showVisible(type='checkbox', checked)
+							label(for='showVisible') Show Visible
+							br
+							button.btn.btn-primary#applyBtn(type='button') Apply
+
+			//Entry Table
 			.panel
 				.heading
 					| Entries
@@ -58,8 +88,10 @@ block content
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
-								!= entries[i]._id
-							td #{entries[i].timestamp}
+								//Substring ensures only the start of description is displayed
+								!=entries[i].description.substring(0,75)
+							td 
+								|#{entries[i].timestamp}
 							td 
 								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="alert('Go to history of entry')")
 							td
