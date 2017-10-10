@@ -30,19 +30,7 @@ block content
 			.createJournalButton
 				form(method="GET", action="/createJournal", id="create")
 					button#addJournalButton + Create A New Journal
-			#overlay
-			#popup
-				.popupForm
-					form(method="POST", action="/createJournals", id="create")
-						x
-						br
-						//This should be removed (its the wrong popup thing)
-						input#journalName(type='text', name='journalName', placeholder='Enter Journal Name')
-						br
-						.popupButtons
-							button#createButton Create
-							button#cancelButton Cancel
-						//^^^^^^
+					
 			- for (var i = journals.length - 1; i >= 0; i--) {
 				-var jid = journals[i]._id;
 				//p= jid
