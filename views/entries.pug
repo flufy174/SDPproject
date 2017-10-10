@@ -92,7 +92,7 @@ block content
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
 
 								//Substring ensures only the start of description is displayed
-								!=entries[i].description.substring(0,75)
+								!=entries[i].entryName
 							td 
 								|#{entries[i].timestamp}
 							td 
