@@ -23,7 +23,7 @@ block content
 			.container
 				input(type='text', name='entry_name', placeholder='Enter Entry Name')
 				button(type='save') Save Entry
-				label Last Edited On: INSERT TIMESTAMP HERE
+				label Last Edited On: #{timestamp}
 			br
 			textarea(id="entry" rows="30" cols="100" name="userEntry")
 				| This is the Journal Text Area

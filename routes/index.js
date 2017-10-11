@@ -194,7 +194,18 @@ router.get('/journal/:jid', function (req, res, next) {
 
 /* Provides the create journals page */
 router.get('/entryeditor/:id', function (req, res, next) {
-    res.render('entryeditor.pug', { user: req.user, journalId: req.params.id});
+
+    timestamp = new Date(Date.now()),
+        timestampvalues = [
+            timestamp.getFullYear(),
+            timestamp.getMonth() + 1,
+            timestamp.getDate(),
+            timestamp.getHours(),
+            timestamp.getMinutes(),
+            timestamp.getSeconds(),
+        ];
+
+    res.render('entryeditor.pug', { user: req.user, journalId: req.params.id, timeStamp: timestamp});
 });
 
 /* Provides the create journals page */
@@ -233,7 +244,7 @@ router.post('/entryeditor/:id', function (req, res, next) {
         // saved!
     })
     console.log(req.body)
-    res.redirect('/journals')
+    res.redirect('/journal/' + req.param)
 
     //res.redirect('createJournals.pug', { user: req.user });
     //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
@@ -281,7 +292,7 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
 
     var userEntryRecord = new userEntry({
         _id: newObjectID,
-        entryName: 'Temp',
+        entryName: req.body.entry_name,
         parentID: req.params.jid,
         journalName: 'Temp',
         description: req.body.userEntry,
@@ -293,9 +304,9 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
     console.log("****" + req.body.entry_name + "****")
 
     userEntry.collection.updateMany({ userName: name, '_id': o_id },
-        { $set: { parentID: newObjectID + '', entryName: req.body.entry_name} });
+        { $set: { parentID: newObjectID + ''} });
     userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
-        { $set: { parentID: newObjectID + '', entryName: req.body.entry_name} });
+        { $set: { parentID: newObjectID + ''} });
 
     userEntryRecord.save(function (err) {
         if (err) return handleError(err);
