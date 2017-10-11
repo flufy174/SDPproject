@@ -1,9 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\public\\javascripts",
+    "\\routes",
+    "\\tests",
     "\\views"
   ],
-  "SelectedNode": "\\views\\_bootstrap.pug",
+  "SelectedNode": "\\routes\\index.js",
   "PreviewInSolutionExplorer": false
 }
