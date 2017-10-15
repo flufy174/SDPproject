@@ -88,10 +88,9 @@ block content
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
-								//Substring ensures only the start of description is displayed
-								!=entries[i].description.substring(0,75)
+								|#{entries[i].entryName}
 							td 
-								|#{entries[i].timestamp}
+								|#{entries[i].timestamp.substring(0,24)}
 							td 
 								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="alert('Go to history of entry')")
 							td

@@ -18,9 +18,10 @@ var journal = new mongoose.Schema({
 
 var entry = new mongoose.Schema({
     parentID: String,
-    journaName: String,
+    entryName: String,
     description: String,
     timestamp: String,
+    reasonForModification: String,
     userName: String,
 });
 
@@ -221,9 +222,10 @@ router.post('/entryeditor/:id', function (req, res, next) {
 
     var userSubmitEntry = new userEntry({
         parentID: req.params.id,
-        journalName: 'Temp',
+        entryName: req.body.entryName,
         description: req.body.userEntry,
         timestamp: timestamp,
+        reasonForModification: "Original",
         userName: req.user.username,
     });
 
@@ -234,11 +236,8 @@ router.post('/entryeditor/:id', function (req, res, next) {
     console.log(req.body)
     res.redirect('/journals')
 
-    //res.redirect('createJournals.pug', { user: req.user });
-    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
 
-/* Provides the create journals page */
 router.get('/entrychanger/:jid/:id', function (req, res, next) {
 
     var o_id = new mongo.ObjectID(req.params.id);
@@ -257,8 +256,6 @@ router.get('/entrychanger/:jid/:id', function (req, res, next) {
     })
 
     
-    
-
     
 });
 
@@ -284,9 +281,10 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
     var userEntryRecord = new userEntry({
         _id: newObjectID,
         parentID: req.params.jid,
-        journalName: 'Temp',
+        entryName: req.body.entryName,
         description: req.body.userEntry,
         timestamp: timestamp,
+        reasonForModification: req.body.reason,
         userName: req.user.username,
     });
 

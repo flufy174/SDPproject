@@ -11,6 +11,10 @@ h1{
     font-weight: bold;
 }
 
+#entryNameTf{
+    width: 300px;
+    margin: 10px;
+}
 
 .alignCenter{
 	text-align: center;
@@ -175,14 +179,6 @@ button:hover{
 }
 
 /*Search Bar*/
-.navSearch {
-	position: relative; 
-    /*
-    position: absolute;
-    right: 0px;
-    width: 25%;*/
-    width: 65%;
-}
 .advSearch{
 	width: 100%;
     position: relative;
@@ -217,7 +213,6 @@ button:hover{
 	font-size: 20px;
 }
 
-/*Resize the wrap to see the search bar change!*/
 .wrap {
     margin: 1% 15%;
 }
