@@ -356,4 +356,46 @@ router.get('/hide/:jid/:id', function (req, res, next) {
 });
 
 
+router.post('/profile-details', function (req, res) {
+    var fullName = req.body.name;
+    var email = req.body.email;
+    var colour = req.body.usercolor;
+    
+    console.log(req.user._id);
+    User.findById(req.user._id, function(err, user){
+        if (err)
+            res.send(err);
+        
+        user.full_name = fullName;
+        user.colour_choice = colour;
+        user.email_address = email;
+
+        user.save(function(err){
+            if (err)
+                res.send(err);
+        });
+    });
+    res.redirect('/profile-details');
+});
+
+
+router.post('/profile-password', function (req, res) {
+    /*
+    var newPassword = req.body.newpassword;
+    
+    console.log(req.user._id);
+    User.findById(req.user._id, function(err, user){
+        if (err)
+            res.send(err);
+        
+        user.password = newPassword;
+
+        user.save(function(err){
+            if (err)
+                res.send(err);
+        });
+    });*/
+    res.redirect('/profile-details');
+});
+
 module.exports = router;
