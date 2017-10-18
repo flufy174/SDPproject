@@ -45,7 +45,7 @@ block content
 							button#cancelButton Cancel
 			//Search Bar
 			.panel
-				.heading.collapsible(data-toggle='collapse', href='#collapse1')
+				.heading.collapsible(data-toggle='collapse', href='#collapse1' style='cursor :pointer')
 					|Search Entries  
 					i.fa.fa-arrow-right
 				#collapse1.panel-collapse.collapse
@@ -81,8 +81,7 @@ block content
 					table(style="width:100%")
 						tr
 							th Journal Entry Name
-							th Date Created
-							th History
+							th Date Modified
 							th Hide
 							th Delete
 						- for (var i = entries.length - 1; i >= 0; i--) {
@@ -90,11 +89,9 @@ block content
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
-
-								//Substring ensures only the start of description is displayed
-								!=entries[i].entryName
+								|#{entries[i].entryName}
 							td 
-								|#{entries[i].timestamp}
+								|#{entries[i].timestamp.substring(0,24)}
 							td 
 								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
 							td

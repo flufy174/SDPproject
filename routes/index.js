@@ -22,6 +22,7 @@ var entry = new mongoose.Schema({
     journaName: String,
     description: String,
     timestamp: String,
+    reasonForModification: String,
     userName: String,
     hidden: Boolean
 });
@@ -238,8 +239,9 @@ router.post('/entryeditor/:id', function (req, res, next) {
         journalName: 'Temp',
         description: req.body.userEntry,
         timestamp: timestamp,
+        reasonForModification: "Original",
+        hidden: false,
         userName: req.user.username,
-        hidden: false
     });
 
     userSubmitEntry.save(function (err) {
@@ -300,8 +302,9 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
         journalName: 'Temp',
         description: req.body.userEntry,
         timestamp: timestamp,
+        reasonForModification: req.body.reason,
+        hidden: false,
         userName: req.user.username,
-        hidden: false
     });
 
     console.log("****" + req.body.entry_name + "****")

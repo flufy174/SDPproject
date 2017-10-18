@@ -26,7 +26,7 @@ block content
 							a.nav-link().active Change Details
 						li.nav-item
 							a.nav-link(href='/profile-password') Change Password
-					form.formInput
+					form.formInput(action= '/profile-details', method= 'put')
 						br
 						label(for='name' style='font-weight: bold') Name
 						br
