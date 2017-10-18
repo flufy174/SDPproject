@@ -7,46 +7,29 @@ block content
 				// Keeps nav at center of screen
 				h1 Professional Journal
 				ul.nav.nav-tabs.nav-fill
-					li.nav-item
-						a.nav-link(href='/journals') Journals
-					li.nav-item
-						a.nav-link(href='/search') Search
-					li.nav-item.dropdown
-						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
-						.dropdown-menu
-							a.dropdown-item(href='/profile-details') Profile
-							.dropdown-divider
-							a.dropdown-item(href='') Sign Out
+						li.nav-item
+							a.nav-link(href='/journals') Journals
+						li.nav-item
+							a.nav-link(href='/search') Search
+						li.nav-item.dropdown
+							a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
+							.dropdown-menu
+								a.dropdown-item(href='/profile-details') Profile
+								.dropdown-divider
+								a.dropdown-item(href='') Sign Out
 
-		
+		.alignCenter
 		form(method="POST", action="/entrychanger/" + journalId + "/" + currentRecord._id)
 			br
 			.container
-				.alignCenter
-					label(for='entryNameTf') Entry Name
-					input#entryNameTf(type='text', name='entryName', placeholder='Entry Name')
-					br
-					input#reasonTf(type='text', name='reason', placeholder='Reason for Modification', style='width: 400px')
-					br
-					| Last Edited On: #{currentRecord.timestamp.substring(0,24)}
-					br
-					| Reason: #{currentRecord.reasonForModification}
-
-					br
-
-				textarea(id="entry" rows="20" name="userEntry")
-					!=currentRecord.description
-				br
-				.alignCenter
-					button.btn.btn-primary(type='save') Save Entry
-				- for(var i = oldRecords.length - 1; i >= 0; i--){
-					.panel
-						.heading
-							!=oldRecords[i].reasonForModification
-						.body
-							p(style='font-weight : bold')!=oldRecords[i].timestamp.substring(0,24)
-							p!=oldRecords[i].description
-				- }
-
-	script.
-		document.getElementById("entryNameTf").value = "#{currentRecord.entryName}";
+				input(id="entry_name", type='text', name='entry_name', value= "" + currentRecord.entryName)
+				
+				button(type='save') Save Entry
+			br
+			textarea(id="entry" rows="30" cols="100" name="userEntry")
+				p!= currentRecord.description
+			- for(var i = oldRecords.length - 1; i >= 0; i--){
+				.clickablePanel()
+					.body
+						p!=oldRecords[i].description
+			- }

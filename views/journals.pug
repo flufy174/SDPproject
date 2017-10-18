@@ -33,7 +33,7 @@ block content
 					
 			- for (var i = journals.length - 1; i >= 0; i--) {
 				-var jid = journals[i]._id;
-				//p= jid
+
 				form(method="GET", action='/journal/' + jid, id='' + i)
 					.clickablePanel(onclick='document.getElementById("' + i + '" ).submit();')
 						.heading(id="journalHeading")
