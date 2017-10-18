@@ -21,12 +21,37 @@ block content
 				label Email
 				input(type='email', name='email', placeholder='Enter your email address')
 				label Password
-				input(type='password', name='password', placeholder='Enter Password')
+				input(type='password', name='password' id='password', placeholder="Enter Password")
 				label Confirm Password
-				input(type='password', name='password-confirm', placeholder='Enter Password Again')
+				br
+				span#message
+				input(type='password', name='confirm_password', id='confirm_password',  placeholder='Enter Password Again')
 				label Color in HEX (#FFFFFF)
 				input(type='text', name='usercolor', placeholder='Enter Your Favourite Color')
 				br
 				br
 				//a.btn.btn-primary.btn-block(onclick="document.getElementById('register').submit();") Register
 				button#registerBtn.btn.btn-primary.btn-block(type='submit') Register
+
+				script.
+					document.getElementById("password").onkeyup = function(){
+						if (document.getElementById('password').value ==
+							document.getElementById('confirm_password').value) {
+							document.getElementById('message').style.color = 'green';
+							document.getElementById('message').innerHTML = 'Matching!';
+						} else {
+							document.getElementById('message').style.color = 'red';
+							document.getElementById('message').innerHTML = 'Not Matching!';
+						}
+					}
+					document.getElementById("confirm_password").onkeyup = function () {
+						if (document.getElementById('password').value ==
+							document.getElementById('confirm_password').value) {
+							document.getElementById('message').style.color = 'green';
+							document.getElementById('message').innerHTML = 'Matching!';
+						} else {
+							document.getElementById('message').style.color = 'red';
+							document.getElementById('message').innerHTML = 'Not Matching!';
+						}
+					}
+
