@@ -229,6 +229,8 @@ router.post('/entryeditor/:id', function (req, res, next) {
     console.log(req.body.entry + '*');
     console.log(req.body.userEntry + '**');
 
+    console.log(req.params.id)
+
     var userSubmitEntry = new userEntry({
         entryName: req.body.entry_name,
         parentID: req.params.id,
@@ -244,7 +246,7 @@ router.post('/entryeditor/:id', function (req, res, next) {
         // saved!
     })
     console.log(req.body)
-    res.redirect('/journal/' + req.param)
+    res.redirect('/journal/' + req.params.id)
 
     //res.redirect('createJournals.pug', { user: req.user });
     //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
