@@ -44,27 +44,34 @@ block content
 							button#createButton Create
 							button#cancelButton Cancel
 			//Search Bar
-			form(method="POST",  action='/search/' + journalId, id='search')
-				.panel
-					.heading.collapsible(data-toggle='collapse', href='#collapse1')
-						|Search Entries  
-						i.fa.fa-arrow-right
-					#collapse1.panel-collapse.collapse
-						.body.alignCenter
-							.wrap
-								.advSearch
-									input#myInput.searchTerm(type='text', placeholder='Keywords', name='searchText')
-									//button.searchButton(type='submit', onclick="window.location='/search/" + journalId)
-										i.fa.fa-search
+			.panel
+				.heading.collapsible(data-toggle='collapse', href='#collapse1' style='cursor :pointer')
+					|Search Entries  
+					i.fa.fa-arrow-right
+				#collapse1.panel-collapse.collapse
+					.body.alignCenter
+						.wrap
+							.advSearch
+								input#myInput.searchTerm(type='text', placeholder='Keywords')
+								button.searchButton(type='submit')
+									i.fa.fa-search
+						br
+						br
+						
+						|Search Date Between
+						br 
+						input#beginDf(type='date' name='date' max='2000-13-13')
+						input#endDf(type='date' name='date' min='2000-13-13' max='2000-13-13')
+						br
+						.addPaddingToChildren
+							input#showHidden(type='checkbox')
+							label(for='showHidden') Show Hidden
+							input#showArchived(type='checkbox')
+							label(for='showArchived') Show Archived
+							input#showVisible(type='checkbox', checked)
+							label(for='showVisible') Show Visible
 							br
-							br
-							.addPaddingToChildren
-								input#showHidden(type='checkbox', value='showHidden', name='hiddenBox')
-								label(for='showHidden') Show Hidden
-								input#showHidden(type='checkbox', value='showDeleted', name='deletedBox')
-								label(for='showHidden') Show Deleted
-								br
-								button.btn.btn-primary#applyBtn(type='button', onclick='document.getElementById("search").submit();') Apply
+							button.btn.btn-primary#applyBtn(type='button') Apply
 
 			//Entry Table
 			.panel
@@ -74,20 +81,17 @@ block content
 					table(style="width:100%")
 						tr
 							th Journal Entry Name
-							th Date Created
-							th History
+							th Date Modified
 							th Hide
 							th Delete
 						- for (var i = entries.length - 1; i >= 0; i--) {
-						- if (entries[i].hide == false && entries[i].deleted == false){
+						- if (entries[i].hidden == false){
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
-
-								//Substring ensures only the start of description is displayed
-								!=entries[i].entryName
+								|#{entries[i].entryName}
 							td 
-								|#{entries[i].timestamp}
+								|#{entries[i].timestamp.substring(0,24)}
 							td 
 								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
 							td

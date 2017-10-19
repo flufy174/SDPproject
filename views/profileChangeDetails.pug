@@ -26,8 +26,8 @@ block content
 							a.nav-link().active Change Details
 						li.nav-item
 							a.nav-link(href='/profile-password') Change Password
-					form.formInput
-						br
+					br
+					form.formInput(action='/profile-details', method= 'post')
 						label(for='name' style='font-weight: bold') Name
 						br
 						input#nameTf(type='text', name='name', value= '')
@@ -48,3 +48,33 @@ block content
 		document.getElementById("nameTf").value = "#{user.full_name}";
 		document.getElementById("emailTf").value = "#{user.email_address}";
 		document.getElementById("colorTf").value = "#{user.colour_choice}";
+
+		$(document).ready(function () {
+			SetContrast("#{user.colour_choice}");
+
+			function HexToRgb(hex) {
+				var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+				return result ? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16)
+				} : null;
+			}
+
+			function SetContrast(hex) {
+
+				var red = HexToRgb(hex).r;
+				var green = HexToRgb(hex).g;
+				var blue = HexToRgb(hex).b;
+				var o = Math.round(((red * 299) +
+					(green * 587) +
+					(blue * 114)) / 1000);
+				console.log(o);
+
+				var fore = (o > 125) ? 'black' : 'white';
+				var back = 'rgb(' + red + ',' + green + ',' + blue + ')';
+
+				$('.heading').css('color', fore);
+				$('.heading').css('background-color', back);
+			}
+		});
