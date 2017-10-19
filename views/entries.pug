@@ -16,8 +16,6 @@ block content
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
 							a.nav-link(href='/journals') Journals
-						li.nav-item
-							a.nav-link(href='/search') Search
 						li.nav-item.dropdown
 							a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
 							.dropdown-menu
@@ -46,7 +44,7 @@ block content
 			//Search Bar
 			form(method="POST",  action='/search/' + journalId, id='search')
 				.panel
-					.heading.collapsible(data-toggle='collapse', href='#collapse1')
+					.heading.collapsible(data-toggle='collapse', href='#collapse1', style='cursor: pointer')
 						|Search Entries  
 						i.fa.fa-arrow-right
 					#collapse1.panel-collapse.collapse
@@ -87,13 +85,13 @@ block content
 								//Substring ensures only the start of description is displayed
 								!=entries[i].entryName
 							td 
-								|#{entries[i].timestamp}
+								|#{entries[i].timestamp.substring(0,24)}
 							td 
-								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/historyIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
 							td
-								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="window.location='/hide/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/hideIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/hide/" + journalId + "/" + entries[i]._id + "'")
 							td  											
-								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="window.location='/delete/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/trashIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/delete/" + journalId + "/" + entries[i]._id + "'")
 							- }
 						- }
 				script.

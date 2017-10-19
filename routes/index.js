@@ -202,26 +202,26 @@ router.get('/search/:jid/:term/:hidden/:deleted', function (req, res, next) {
     var name = req.user.username;
     var journalId = req.params.jid;
 
-    hidden = req.params.hidden
-    deleted = req.params.deleted
+    hidden = req.params.hidden;
+    deleted = req.params.deleted;
 
-    showDeleted = false
-    showHidden = false
+    showDeleted = false;
+    showHidden = false;
 
     if (hidden == 'true')
-        showHidden = true
+        showHidden = true;
     if (deleted == 'true')
-        showDeleted = true
+        showDeleted = true;
 
 
 
-    console.log(hidden)
-    console.log(deleted)
+    console.log(hidden);
+    console.log(deleted);
 
     var regex = new RegExp(req.params.term, 'i');
     userEntry.find({ userName: name, parentID: journalId, $or: [{ 'description': regex }, { 'entryName': regex }], deleted: showDeleted, hide: showHidden }, function (err, uentries) {
         var pageEntries = uentries;
-        res.render('searchResults.pug', { user: req.user, entries: pageEntries, journalId: journalId });
+        res.render('searchResults.pug', { user: req.user, entries: pageEntries, seachTerm : req.param.term, journalId: journalId, showDeleted : showDeleted, showHidden:showHidden});
 
     });
 
@@ -238,20 +238,20 @@ router.get('/search/:jid//:hidden/:deleted', function (req, res, next) {
     hidden = req.params.hidden
     deleted = req.params.deleted
 
-    showHidden = false
-    showDeleted = false
+    showHidden = false;
+    showDeleted = false;
 
     if (hidden == 'true')
-        showHidden = true
+        showHidden = true;
     if (deleted == 'true')
-        showDeleted = true
+        showDeleted = true;
 
-    console.log(showHidden)
-    console.log(showDeleted)
+    console.log(showHidden);
+    console.log(showDeleted);
 
 
     userEntry.find({ userName: name, parentID: journalId, deleted: showDeleted, hide: showHidden }, function (err, uentries) {
-        console.log(pageEntries)
+        console.log(pageEntries);
 
         var pageEntries = uentries;
         
@@ -466,6 +466,48 @@ router.get('/unhide/:jid/:id', function (req, res, next) {
 
 });
 
+
+router.post('/profile-details', function (req, res) {
+    var fullName = req.body.name;
+    var email = req.body.email;
+    var colour = req.body.usercolor;
+    
+    console.log(req.user._id);
+    User.findById(req.user._id, function(err, user){
+        if (err)
+            res.send(err);
+        
+        user.full_name = fullName;
+        user.colour_choice = colour;
+        user.email_address = email;
+
+        user.save(function(err){
+            if (err)
+                res.send(err);
+        });
+    });
+    res.redirect('/profile-details');
+});
+
+
+router.post('/profile-password', function (req, res) {
+    /*
+    var newPassword = req.body.newpassword;
+    
+    console.log(req.user._id);
+    User.findById(req.user._id, function(err, user){
+        if (err)
+            res.send(err);
+        
+        user.password = newPassword;
+
+        user.save(function(err){
+            if (err)
+                res.send(err);
+        });
+    });*/
+    res.redirect('/profile-details');
+});
 
 
 module.exports = router;

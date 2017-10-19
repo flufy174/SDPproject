@@ -16,8 +16,6 @@ block content
 					ul.nav.nav-tabs.nav-fill
 						li.nav-item
 							a.nav-link(href='/journals') Journals
-						li.nav-item
-							a.nav-link(href='/search') Search
 						li.nav-item.dropdown
 							a.nav-link.dropdown-toggle(data-toggle='dropdown', href='', role='button', aria-haspopup='true', aria-expanded='false') My Account
 							.dropdown-menu
@@ -46,14 +44,14 @@ block content
 			//Search Bar
 			form(method="POST",  action='/search/' + journalId, id='search')
 				.panel
-					.heading.collapsible(data-toggle='collapse', href='#collapse1')
+					.heading.collapsible(data-toggle='collapse', href='#collapse1', style='cursor: pointer')
 						|Search Entries  
 						i.fa.fa-arrow-right
 					#collapse1.panel-collapse.collapse
 						.body.alignCenter
 							.wrap
 								.advSearch
-									input#myInput.searchTerm(type='text', placeholder='Keywords', name='searchText')
+									input#searchText.searchTerm(type='text', placeholder='Keywords', name='searchText')
 									//button.searchButton(type='submit', onclick="window.location='/search/" + journalId)
 										i.fa.fa-search
 							br
@@ -61,7 +59,7 @@ block content
 							.addPaddingToChildren
 								input#showHidden(type='checkbox', value='showHidden', name='hiddenBox')
 								label(for='showHidden') Search hidden
-								input#showHidden(type='checkbox', value='showDeleted', name='deletedBox')
+								input#showDeleted(type='checkbox', value='showDeleted', name='deletedBox')
 								label(for='showHidden') Search deleted
 								br
 								button.btn.btn-primary#applyBtn(type='button', onclick='document.getElementById("search").submit();') Apply
@@ -91,24 +89,27 @@ block content
 								//Substring ensures only the start of description is displayed
 								!=entries[i].entryName
 							td 
-								|#{entries[i].timestamp}
+								|#{entries[i].timestamp.substring(0,24)}
 								- if(entries[i].deleted == false){
 							td 
-								img(src="/images/historyIcon.png", style="width:25px;height:25px;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/historyIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/entrychanger/" + journalId + "/" + entries[i]._id + "'")
 								- if(entries[i].hide == true){
 							td
-								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="window.location='/unhide/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/hideIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/unhide/" + journalId + "/" + entries[i]._id + "'")
 								- } else {
 							td
-								img(src="/images/hideIcon.png", style="width:25px;height:25px;", onclick="window.location='/hide/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/hideIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/hide/" + journalId + "/" + entries[i]._id + "'")
 								- }
 							td  											
-								img(src="/images/trashIcon.png", style="width:25px;height:25px;", onclick="window.location='/delete/" + journalId + "/" + entries[i]._id + "'")
+								img(src="/images/trashIcon.png", style="width:25px;height:25px;cursor: pointer;", onclick="window.location='/delete/" + journalId + "/" + entries[i]._id + "'")
 								- }
 							- }
 						- }
 				script.
-					$(document).ready(function () {
+
+				
+
+					$(document).ready(function () {	
 						SetContrast("#{user.colour_choice}");
 
 
@@ -141,3 +142,12 @@ block content
 
 						}
 					});
+	script.
+		var showHidden = document.getElementById('showHidden').checked = #{showHidden};
+		var showDeleted = document.getElementById('showDeleted').checked = #{showDeleted};
+
+			
+
+		
+
+					
