@@ -124,7 +124,7 @@ router.get('/profile-password', function(req, res, next){
 router.get('/logout', function(req, res) {
     req.logout();
     req.session.destroy();
-    res.redirect('/');
+    res.redirect('/signin');
 });
 
 
