@@ -219,7 +219,7 @@ router.get('/search/:jid/:term/:hidden/:deleted', function (req, res, next) {
     console.log(deleted)
 
     var regex = new RegExp(req.params.term, 'i');
-    userEntry.find({ userName: name, parentID: journalId, $or: [{ 'description': regex }, { 'entryName': regex }], $and: [{ deleted: showDeleted }, { hide: showHidden }] }, function (err, uentries) {
+    userEntry.find({ userName: name, parentID: journalId, $or: [{ 'description': regex }, { 'entryName': regex }], deleted: showDeleted, hide: showHidden }, function (err, uentries) {
         var pageEntries = uentries;
         res.render('searchResults.pug', { user: req.user, entries: pageEntries, journalId: journalId });
 
@@ -250,7 +250,7 @@ router.get('/search/:jid//:hidden/:deleted', function (req, res, next) {
     console.log(showDeleted)
 
 
-    userEntry.find({ userName: name, parentID: journalId, $or: [{ 'deleted': showDeleted }, { 'hide': showHidden }]}, function (err, uentries) {
+    userEntry.find({ userName: name, parentID: journalId, deleted: showDeleted, hide: showHidden }, function (err, uentries) {
         console.log(pageEntries)
 
         var pageEntries = uentries;
