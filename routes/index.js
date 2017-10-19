@@ -23,7 +23,8 @@ var entry = new mongoose.Schema({
     description: String,
     timestamp: String,
     userName: String,
-    hidden: Boolean
+    hide: Boolean,
+    deleted: Boolean
 });
 
 var entryRecord = new mongoose.Schema({
@@ -183,6 +184,8 @@ router.get('/journal/:jid', function (req, res, next) {
     var name = req.user.username;
     var journalId = req.params.jid;
 
+    console.log(req.body.searchText)
+
     userEntry.find({ userName: name, parentID: journalId }, function (err, uentries) {
         var pageEntries = uentries;
         res.render('entries.pug/', { user: req.user, entries: pageEntries, journalId: journalId });
@@ -192,6 +195,99 @@ router.get('/journal/:jid', function (req, res, next) {
     //res.render('createJournals.pug', { user: req.user,  });
     //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
 });
+
+/* Provides the create journals page */
+router.get('/search/:jid/:term/:hidden/:deleted', function (req, res, next) {
+
+    var name = req.user.username;
+    var journalId = req.params.jid;
+
+    hidden = req.params.hidden
+    deleted = req.params.deleted
+
+    showDeleted = false
+    showHidden = false
+
+    if (hidden == 'true')
+        showHidden = true
+    if (deleted == 'true')
+        showDeleted = true
+
+
+
+    console.log(hidden)
+    console.log(deleted)
+
+    var regex = new RegExp(req.params.term, 'i');
+    userEntry.find({ userName: name, parentID: journalId, $or: [{ 'description': regex }, { 'entryName': regex }], $and: [{ deleted: showDeleted }, { hide: showHidden }] }, function (err, uentries) {
+        var pageEntries = uentries;
+        res.render('searchResults.pug', { user: req.user, entries: pageEntries, journalId: journalId });
+
+    });
+
+    //res.render('creazteJournals.pug', { user: req.user,  });
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
+/* Provides the create journals page */
+router.get('/search/:jid//:hidden/:deleted', function (req, res, next) {
+
+    var name = req.user.username;
+    var journalId = req.params.jid;
+
+    hidden = req.params.hidden
+    deleted = req.params.deleted
+
+    showHidden = false
+    showDeleted = false
+
+    if (hidden == 'true')
+        showHidden = true
+    if (deleted == 'true')
+        showDeleted = true
+
+    console.log(showHidden)
+    console.log(showDeleted)
+
+
+    userEntry.find({ userName: name, parentID: journalId, $or: [{ 'deleted': showDeleted }, { 'hide': showHidden }]}, function (err, uentries) {
+        console.log(pageEntries)
+
+        var pageEntries = uentries;
+        
+        res.render('searchResults.pug', { user: req.user, entries: pageEntries, journalId: journalId });
+
+    });
+
+    //res.render('creazteJournals.pug', { user: req.user,  });
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
+/* Provides the create journals page */
+router.post('/search/:jid', function (req, res, next) {
+
+    var name = req.user.username;
+    var term = req.body.searchText;
+    console.log(term)
+    console.log(req.body.hiddenBox);
+    console.log(req.body.deletedBox);
+
+    hidden = true
+    deleted = true
+
+    if (req.body.hiddenBox == undefined)
+        hidden = false
+    
+
+    if (req.body.deletedBox == undefined)
+        deleted = false
+
+    res.redirect('/search/' + req.params.jid + '/' + term + '/' + hidden + '/' + deleted)
+
+    //res.render('createJournals.pug', { user: req.user,  });
+    //res.render('index.pug', { title: 'World!', example: ['hello', 'guys', 'this', 'is', 'an', 'example'] });
+});
+
 
 /* Provides the create journals page */
 router.get('/entryeditor/:id', function (req, res, next) {
@@ -239,7 +335,8 @@ router.post('/entryeditor/:id', function (req, res, next) {
         description: req.body.userEntry,
         timestamp: timestamp,
         userName: req.user.username,
-        hidden: false
+        hide: false,
+        deleted: false
     });
 
     userSubmitEntry.save(function (err) {
@@ -295,13 +392,14 @@ router.post('/entrychanger/:jid/:id', function (req, res, next) {
 
     var userEntryRecord = new userEntry({
         _id: newObjectID,
+        deleted: false,
         entryName: req.body.entry_name,
         parentID: req.params.jid,
         journalName: 'Temp',
         description: req.body.userEntry,
         timestamp: timestamp,
         userName: req.user.username,
-        hidden: false
+        hide: false
     });
 
     console.log("****" + req.body.entry_name + "****")
@@ -327,9 +425,9 @@ router.get('/delete/:jid/:id', function (req, res, next) {
     var o_id = new mongo.ObjectID(req.params.id);
 
     userEntry.collection.updateMany({ userName: name, '_id': o_id },
-        { $set: { parentID: req.params.id + '' } });
+        { $set: { deleted: true } });
     userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
-        { $set: { parentID: req.params.id + '' } });
+        { $set: { deleted: true } });
 
     console.log(req.params.id)
     res.redirect('/journal/' + req.params.jid);
@@ -343,9 +441,9 @@ router.get('/hide/:jid/:id', function (req, res, next) {
     var o_id = new mongo.ObjectID(req.params.id);
 
     userEntry.collection.updateMany({ userName: name, '_id': o_id },
-        { $set: { hidden: true} });
+        { $set: { hide: true} });
     userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
-        { $set: { hidden: true} });
+        { $set: { hide: true} });
 
     console.log(req.params.id)
     res.redirect('/journal/' + req.params.jid);

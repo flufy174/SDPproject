@@ -79,7 +79,7 @@ block content
 							th Hide
 							th Delete
 						- for (var i = entries.length - 1; i >= 0; i--) {
-						- if (entries[i].hide == false && entries[i].deleted == false){
+						- if (1==1){
 						form(method="GET", action='/entrychanger/' + journalId + '/' + entries[i]._id, id='' + i)
 						tr
 							td(onclick='document.getElementById("' + i + '").submit();', style="cursor:pointer")
