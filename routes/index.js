@@ -450,5 +450,22 @@ router.get('/hide/:jid/:id', function (req, res, next) {
 
 });
 
+/* Provides the create journals page */
+router.get('/unhide/:jid/:id', function (req, res, next) {
+
+    var name = req.user.username;
+    var o_id = new mongo.ObjectID(req.params.id);
+
+    userEntry.collection.updateMany({ userName: name, '_id': o_id },
+        { $set: { hide: false } });
+    userEntry.collection.updateMany({ userName: name, 'parentID': req.params.id },
+        { $set: { hide: false } });
+
+    console.log(req.params.id)
+    res.redirect('/journal/' + req.params.jid);
+
+});
+
+
 
 module.exports = router;
